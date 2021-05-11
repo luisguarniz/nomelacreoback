@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class GameEvent implements ShouldBroadcast
+class messageChangeName implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -22,9 +22,9 @@ class GameEvent implements ShouldBroadcast
      */
     public function __construct($data)
     {
-    
         $this->response = [
-            'msgtrue'      => $data['msgtrue'],
+            'msgNameEditado'   => $data['msgNameEditado'],
+           // 'codigoSesion' => $data['codigoSesion'],
             'to'           => $data['to'],
             'from'         => auth()->user(),
         ];
@@ -35,9 +35,8 @@ class GameEvent implements ShouldBroadcast
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    public function broadcastOn()// ver si este metodo recibe parametros. si es asi podriamos enviar el id del canal a donde nos queremos unir
-                                // y a su ves ese id lo concatenamos con channel-game
+    public function broadcastOn()
     {
-        return new PrivateChannel("room.{$this->response['to']}");
+        return new PrivateChannel("changeName.{$this->response['to']}");
     }
 }

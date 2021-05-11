@@ -25,9 +25,9 @@ class UserController extends Controller
       $nomCharacter = $character->characterName;
   
       $this->newUser = new User();
-      $this->newUser->AdminUserCode = Uuid::uuid();
-      $this->newUser->NameUsuario = $nomCharacter . "-" . $nrorandom;
-      $this->newUser->CustomName = $nomCharacter;
+      $this->newUser->adminUserCode = Uuid::uuid();
+      $this->newUser->nameUsuario = $nomCharacter . "-" . $nrorandom;
+      $this->newUser->customName = $nomCharacter;
       //$this->newUser->NameUsuario = $nomAnimal;
       $this->newUser->password = bcrypt('12345678');
       $this->newUser->isAdmin = '1';
@@ -83,9 +83,9 @@ class UserController extends Controller
       $nomCharacter = $character->characterName;
   
       $this->newInvited = new User();
-      $this->newInvited->AdminUserCode = Uuid::uuid();
-      $this->newInvited->NameUsuario = $nomCharacter . "-" . $nrorandom;
-      $this->newInvited->CustomName = $nomCharacter;
+      $this->newInvited->adminUserCode = Uuid::uuid();
+      $this->newInvited->nameUsuario = $nomCharacter . "-" . $nrorandom;
+      $this->newInvited->customName = $nomCharacter;
       //$this->newInvited->NameUsuario = $nomAnimal;
       $this->newInvited->password = bcrypt('12345678');
       $this->newInvited->isInvited = '1';
@@ -107,15 +107,15 @@ class UserController extends Controller
     public function editNameUser(Request $request)
     {
   
-      $Namepokemon = User::select('users.CustomName')
-      ->where('users.AdminUserCode', $request->AdminUserCode)->first();
+      $namepokemon = User::select('users.customName')
+      ->where('users.adminUserCode', $request->adminUserCode)->first();
       
       //reseteo el nombre para que no se concatene si editan mas de una ves su nombre
-      $NamepokemonReset = Str::after($Namepokemon->CustomName, "-");
+      $namepokemonReset = Str::after($namepokemon->customName, "-");
   
-      $newName = User::where('users.AdminUserCode', $request->AdminUserCode)
+      $newName = User::where('users.AdminUserCode', $request->adminUserCode)
         ->update([
-          'CustomName' => $request->CustomName ."-". $NamepokemonReset
+          'CustomName' => $request->customName ."-". $namepokemonReset
         ]);
   
       return response()->json([
