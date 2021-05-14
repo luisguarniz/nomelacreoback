@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CardController;
 use App\Http\Controllers\Api\RoomController;
+use App\Http\Controllers\Api\Session_GameController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -51,3 +52,6 @@ Route::get("Room/getStatusbtnStopVoting/{roomCode}",[RoomController::class, 'get
 
 //Rutas de las cartas
 Route::get("Card/getCard",[CardController::class, 'getCard'])->name('User.getCard');
+
+//Rutas de la session_game
+Route::get("Session_game/makeSession/{idRoom}",[Session_GameController::class, 'makeSession'])->name('Session_game.makeSession');

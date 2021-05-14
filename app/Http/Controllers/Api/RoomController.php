@@ -36,6 +36,7 @@ class RoomController extends Controller
 
 
     //una ves creada la sala con save() pasamos a retornar un objeto a la vista
+    $response['id'] = $newRoom->id;
     $response['roomID'] = $newRoom->roomID;
     $response['roomName'] = $newRoom->roomName;
     $response['roomCode'] = $newRoom->roomCode;

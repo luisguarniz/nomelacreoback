@@ -14,7 +14,8 @@ class CreateRoomsTable extends Migration
     public function up()
     {
         Schema::create('rooms', function (Blueprint $table) {
-            $table->uuid('roomID')->primary();
+            $table->id();
+            $table->uuid('roomID');
             $table->unsignedBigInteger('idAdmin');
             $table->string('roomName');
             $table->string('roomCode');
