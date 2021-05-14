@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CardController;
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -46,3 +47,7 @@ Route::get("Room/getStatusbtnVoting/{roomCode}",[RoomController::class, 'getStat
 
 Route::put("Room/changeStatusbtnStopVoting",[RoomController::class, 'changeStatusbtnStopVoting'])->name('Room.changeStatusbtnStopVoting');
 Route::get("Room/getStatusbtnStopVoting/{roomCode}",[RoomController::class, 'getStatusbtnStopVoting'])->name('Room.getStatusbtnStopVoting');
+
+
+//Rutas de las cartas
+Route::get("Card/getCard",[CardController::class, 'getCard'])->name('User.getCard');
