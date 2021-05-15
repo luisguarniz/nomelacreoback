@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Card;
+use App\Models\Game;
 use App\Models\Session_game;
+use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 
 class Session_GameController extends Controller
@@ -13,24 +15,35 @@ class Session_GameController extends Controller
   //modifica el estatus de de dos cartas de "0" a "1" y esas dos cartas son devueltas al front
     public function makeSession(Request $request){
         $statusInicial = false;
-        $idRoom = $request->idRoom;
+        $idSessionGame="";
+        $isActive = true;
+        $roomID = $request->roomID;
         $allcard = Card::all();
-        $Sessiongames = array();
+       // $Sessiongames = array();
         $card = Card::all()->random(2); // con este metodo traigo un registro random
-        for ($i=0; $i < count($allcard); $i++) { 
-            $Sessiongame = array();
-            $Sessiongame = new Session_game;
-            $Sessiongame['idRoom'] = $idRoom;
-            $Sessiongame['idCard'] = $allcard[$i]['id'];
-            $Sessiongame['statusCards'] = $statusInicial;
+        $Sessiongame = array();
+        $Sessiongame = new Session_game;
+        $idSessionGame  = Uuid::uuid();
+        $Sessiongame['idSessionGame'] = $idSessionGame;
+        $Sessiongame['roomID'] = $roomID;
+        $Sessiongame['isActive'] = $isActive;
+        //$Sessiongames = $Sessiongame;
+        $Sessiongame->save();
 
-            $Sessiongames[$i] = $Sessiongame;
-            $Sessiongame->save();
+        for ($i=0; $i < count($allcard); $i++) { 
+            $games = array();
+            $game = new Game;
+            $game['idGame'] = Uuid::uuid();
+            $game['idSessionGame'] = $idSessionGame;
+            $game['idCard'] = $allcard[$i]['idCard'];
+            $game['statusCards'] = $statusInicial;
+            $games[$i] = $game;
+            $game->save();
         }
 
         for ($i=0; $i < count($card); $i++) {
-          Session_game::where('session_games.idRoom', $idRoom)
-          ->where('session_games.idCard', $card[$i]->id)
+          Game::where('games.idSessionGame', $idSessionGame)
+          ->where('games.idCard', $card[$i]->idCard)
           ->update([
             'statusCards' => "1"
           ]);

@@ -14,18 +14,15 @@ class CreateSessionGamesTable extends Migration
     public function up()
     {
         Schema::create('session_games', function (Blueprint $table) {
-            $table->unsignedBigInteger('idRoom')->nullable();
-            $table->unsignedBigInteger('idCard')->nullable();
-            $table->boolean("statusCards");
-
-            $table->foreign('idRoom')
-            ->references('id')->on('rooms')
-            ->onDelete('set null');
-
-            $table->foreign('idCard')
-            ->references('id')->on('cards')
-            ->onDelete('set null');
+            $table->uuid("idSessionGame")->primary();
+            $table->uuid('roomID')->nullable();
+            $table->boolean('isActive')->default("1"); //empieza con 1 pero se cambia a cero cuando se crea otra session de juego
             $table->timestamps();
+
+            $table->foreign('roomID')
+            ->references('roomID')->on('rooms');
+            //->onDelete('set null');            
+
         });
     }
 

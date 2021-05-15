@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrderCardsTable extends Migration
+class CreateSessionTurnsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,24 +13,20 @@ class CreateOrderCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_cards', function (Blueprint $table) {
-            $table->uuid("idOrderCard")->primary();
-            $table->uuid('roomID')->nullable();
+        Schema::create('session_turns', function (Blueprint $table) {
+            $table->uuid("idTurn")->primary();
+            $table->unsignedBigInteger('idUser')->nullable();
             $table->uuid('idSessionGame')->nullable();
-            $table->uuid('idCard')->nullable();
-            $table->integer("position")->default("0");
+            $table->boolean("turn")->default('0');//se coloca 1 si es su turno y cero si no es su turno
+            $table->integer("orderTurn")->default('1');// se le asigna un numero aleatorio teniendo en cuenta el total de participantes del juego
             $table->timestamps();
 
-            $table->foreign('roomID')
-            ->references('roomID')->on('rooms')
+            $table->foreign('idUser')
+            ->references('id')->on('users')
             ->onDelete('set null');
 
             $table->foreign('idSessionGame')
             ->references('idSessionGame')->on('session_games')
-            ->onDelete('set null');
-
-            $table->foreign('idCard')
-            ->references('idCard')->on('cards')
             ->onDelete('set null');
 
             
@@ -44,6 +40,6 @@ class CreateOrderCardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_cards');
+        Schema::dropIfExists('session_turns');
     }
 }

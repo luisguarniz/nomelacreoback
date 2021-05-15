@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrderCardsTable extends Migration
+class CreateGamesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,12 @@ class CreateOrderCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_cards', function (Blueprint $table) {
-            $table->uuid("idOrderCard")->primary();
-            $table->uuid('roomID')->nullable();
+        Schema::create('games', function (Blueprint $table) {
+            $table->uuid("idGame")->primary();
             $table->uuid('idSessionGame')->nullable();
             $table->uuid('idCard')->nullable();
-            $table->integer("position")->default("0");
+            $table->boolean("statusCards")->default("0");
             $table->timestamps();
-
-            $table->foreign('roomID')
-            ->references('roomID')->on('rooms')
-            ->onDelete('set null');
 
             $table->foreign('idSessionGame')
             ->references('idSessionGame')->on('session_games')
@@ -44,6 +39,6 @@ class CreateOrderCardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_cards');
+        Schema::dropIfExists('games');
     }
 }

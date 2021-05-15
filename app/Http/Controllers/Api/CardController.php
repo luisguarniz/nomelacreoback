@@ -11,7 +11,7 @@ class CardController extends Controller
     public function getCard()
     {
 
-      $card = Card::all()->random(2); // con este metodo traigo un registro random
+/*      $card = Card::all()->random(2); // con este metodo traigo un registro random
 
       for ($i=0; $i < count($card); $i++) {
         Card::where('cards.cardName', $card[$i]->cardName)
@@ -22,5 +22,5 @@ class CardController extends Controller
       return response()->json([
         'card'  => $card
       ]);
-    }
+      */}
 }
