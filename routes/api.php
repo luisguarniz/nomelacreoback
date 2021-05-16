@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\CardController;
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\Session_GameController;
+use App\Http\Controllers\Api\Session_TurnController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -55,3 +56,6 @@ Route::get("Card/getCard",[CardController::class, 'getCard'])->name('User.getCar
 
 //Rutas de la session_game
 Route::get("Session_game/makeSession/{roomID}",[Session_GameController::class, 'makeSession'])->name('Session_game.makeSession');
+
+//Rutas de Session_Turn
+Route::post("Session_turn/makeSessionTurn",[Session_TurnController::class, 'makeSessionTurn'])->name('Session_turn.makeSessionTurn');

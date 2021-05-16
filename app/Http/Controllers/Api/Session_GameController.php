@@ -49,7 +49,8 @@ class Session_GameController extends Controller
           ]);
       }
         return response()->json([
-          'card'  => $card
+          'card'  => $card,
+          'idSessionGame' => $idSessionGame
         ]);
     }
 }
