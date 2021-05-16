@@ -4,23 +4,37 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Card;
+use App\Models\Game;
+use App\Models\Session_turn;
 use Illuminate\Http\Request;
 
 class CardController extends Controller
 {
-    public function getCard()
-    {
+  public function getCard(Request $request)
+  {
 
-/*      $card = Card::all()->random(2); // con este metodo traigo un registro random
 
-      for ($i=0; $i < count($card); $i++) {
-        Card::where('cards.cardName', $card[$i]->cardName)
+    $cardsNoElegidas = false;
+    
+    $game = Game::where('games.idSessionGame', $request->idSessionGame)
+      ->where('games.statusCards', $cardsNoElegidas)
+      ->get();
+
+    if (!$game->isEmpty()) {
+      $game = $game->random();
+      Game::where('games.idCard', $game->idCard)
         ->update([
-          'statusCard' => "1"
+          'statusCards' => '1'
         ]);
-    }
+
+      $card = Card::where('cards.idCard', $game->idCard)->first();
+        return response()->json([
+          'card' => $card
+        ]);
+    } else {
       return response()->json([
-        'card'  => $card
+        'mensage'  => "ya no hay mas cartas"
       ]);
-      */}
+    }
+  }
 }
