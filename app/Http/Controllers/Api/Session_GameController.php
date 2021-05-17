@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Card;
 use App\Models\Game;
+use App\Models\Order_card;
 use App\Models\Session_game;
 use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
@@ -48,6 +49,18 @@ class Session_GameController extends Controller
             'statusCards' => "1"
           ]);
       }
+
+      for ($i=0; $i < count($card); $i++) {
+
+        $orderCard = new Order_card;
+        $orderCard['idOrderCard'] = Uuid::uuid();
+        $orderCard["roomID"] = $roomID;
+        $orderCard["idSessionGame"] = $idSessionGame;
+        $orderCard["idCard"] = $card[$i]->idCard;
+        $orderCard["position"] = $i; // la primera posicion sera el cero
+        $orderCard->save();
+       
+    }
         return response()->json([
           'card'  => $card,
           'idSessionGame' => $idSessionGame

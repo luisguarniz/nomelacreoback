@@ -20,7 +20,8 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('channel-test', function ($user){
     return $user;
 });
-// TODO: validar existencia sala
+
+
 Broadcast::channel('room.{id}', function ($room) {
     return $room;
 });

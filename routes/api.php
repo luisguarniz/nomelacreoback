@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CardController;
+use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\Session_GameController;
 use App\Http\Controllers\Api\Session_TurnController;
@@ -52,10 +53,16 @@ Route::get("Room/getStatusbtnStopVoting/{roomCode}",[RoomController::class, 'get
 
 
 //Rutas de las cartas
-Route::get("Card/getCard/{idSessionGame}",[CardController::class, 'getCard'])->name('User.getCard');
+Route::get("Card/getCard/{idSessionGame}",[CardController::class, 'getCard'])->name('Card.getCard');
+Route::post("Card/moveCard",[CardController::class, 'moveCard'])->name('Card.moveCard');
 
 //Rutas de la session_game
 Route::get("Session_game/makeSession/{roomID}",[Session_GameController::class, 'makeSession'])->name('Session_game.makeSession');
 
 //Rutas de Session_Turn
 Route::post("Session_turn/makeSessionTurn",[Session_TurnController::class, 'makeSessionTurn'])->name('Session_turn.makeSessionTurn');
+
+//ruta para enviar true cuando se mueve una carta
+Route::post('Message/unblock',[MessageController::class, 'unblock'])
+->name('MessageController.unblock')
+->middleware('auth:api');
