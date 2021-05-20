@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\RoomController;
 use App\Http\Controllers\Api\Session_GameController;
 use App\Http\Controllers\Api\Session_TurnController;
+use App\Http\Controllers\Api\Status_GameController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +56,7 @@ Route::get("Room/getStatusbtnStopVoting/{roomCode}",[RoomController::class, 'get
 //Rutas de las cartas
 Route::get("Card/getCard/{idSessionGame}",[CardController::class, 'getCard'])->name('Card.getCard');
 Route::post("Card/moveCard",[CardController::class, 'moveCard'])->name('Card.moveCard');
+Route::get("Card/getOrderCards/{idSessionGame}",[CardController::class, 'getOrderCards'])->name('Card.getOrderCards');
 
 //Rutas de la session_game
 Route::get("Session_game/makeSession/{roomID}",[Session_GameController::class, 'makeSession'])->name('Session_game.makeSession');
@@ -62,7 +64,21 @@ Route::get("Session_game/makeSession/{roomID}",[Session_GameController::class, '
 //Rutas de Session_Turn
 Route::post("Session_turn/makeSessionTurn",[Session_TurnController::class, 'makeSessionTurn'])->name('Session_turn.makeSessionTurn');
 
+//Rutas de Status_game
+Route::post("Status_game/makeStatus",[Status_GameController::class, 'makeStatus'])->name('Status_game.makeStatus');
+Route::post("Status_game/getStatus",[Status_GameController::class, 'getStatus'])->name('Status_game.getStatus');
+Route::post("Status_game/PressNomelacreo",[Status_GameController::class, 'PressNomelacreo'])->name('Status_game.PressNomelacreo');
+Route::post("Status_game/PressSimelacreo",[Status_GameController::class, 'PressSimelacreo'])->name('Status_game.PressSimelacreo');
+Route::post("Status_game/PressMasoCartas",[Status_GameController::class, 'PressMasoCartas'])->name('Status_game.PressMasoCartas');
+Route::post("Status_game/PressElegirColor",[Status_GameController::class, 'PressElegirColor'])->name('Status_game.PressElegirColor');
+
+
 //ruta para enviar true cuando se mueve una carta
-Route::post('Message/unblock',[MessageController::class, 'unblock'])
-->name('MessageController.unblock')
+Route::post('Message/moveCard',[MessageController::class, 'moveCard'])
+->name('MessageController.moveCard')
+->middleware('auth:api');
+
+//ruta para enviar true cuando se mueve una carta
+Route::post('Message/startGame',[MessageController::class, 'startGame'])
+->name('MessageController.startGame')
 ->middleware('auth:api');

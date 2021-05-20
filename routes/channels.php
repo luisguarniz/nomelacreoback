@@ -26,6 +26,10 @@ Broadcast::channel('room.{id}', function ($room) {
     return $room;
 });
 
+Broadcast::channel('startGame.{id}', function ($startGame) {
+    return $startGame;
+});
+
 // ruta para cambiar nombre
 Broadcast::channel('changeName.{id}', function ($changeName) {
     return $changeName;

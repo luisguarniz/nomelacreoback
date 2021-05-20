@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class GameEvent implements ShouldBroadcast
+class startGame implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -24,7 +24,7 @@ class GameEvent implements ShouldBroadcast
     {
     
         $this->response = [
-            'idSessionGame'      => $data['idSessionGame'],
+            'idSessionGame'=> $data['idSessionGame'],
             'msgtrue'      => $data['msgtrue'],
             'to'           => $data['to'],
             'from'         => auth()->user(),
@@ -39,6 +39,6 @@ class GameEvent implements ShouldBroadcast
     public function broadcastOn()// ver si este metodo recibe parametros. si es asi podriamos enviar el id del canal a donde nos queremos unir
                                 // y a su ves ese id lo concatenamos con channel-game
     {
-        return new PrivateChannel("room.{$this->response['to']}");
+        return new PrivateChannel("startGame.{$this->response['to']}");
     }
 }

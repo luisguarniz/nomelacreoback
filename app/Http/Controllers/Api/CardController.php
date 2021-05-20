@@ -9,6 +9,7 @@ use App\Models\Order_card;
 use App\Models\Session_turn;
 use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CardController extends Controller
 {
@@ -66,5 +67,18 @@ class CardController extends Controller
   return response()->json([
     'mensage'  => "se creo un nuevo orden de cartas"
   ]);
+  }
+
+  public function getOrderCards(Request $request){
+
+    $orderCards = DB::table('order_cards')
+    ->join('cards', 'cards.idCard', '=', 'order_cards.idCard')
+    ->select('cards.cardName')
+    ->where('order_cards.idSessionGame', $request->idSessionGame)
+    ->orderBy('order_cards.position', 'asc')
+    ->get();
+    return response()->json([
+      'orderCards'  => $orderCards
+    ]);
   }
 }
