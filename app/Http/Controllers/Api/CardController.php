@@ -42,6 +42,7 @@ class CardController extends Controller
   }
 
 
+  //recibe arreglo de solo ids de las cartas
   public function moveCard(Request $request){
     //eliminar las cartas actuales
 
@@ -51,7 +52,7 @@ class CardController extends Controller
     $deletedRows = Order_card::where('idSessionGame', $request->idSessionGame)->delete();
 
   //insertar las nuevas posiciones de las cartas
-    
+  
    // $newOrderCard = $request->cards;
   for ($i=0; $i < count($newOrderCard); $i++) { 
     $sessionTurn = new Order_card;

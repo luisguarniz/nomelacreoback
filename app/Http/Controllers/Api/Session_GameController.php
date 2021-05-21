@@ -76,17 +76,5 @@ class Session_GameController extends Controller
     ]);
   }
 
-  public function makeOrderCard(Request $request)
-  {
-    for ($i = 0; $i < count($request->card); $i++) {
 
-      $orderCard = new Order_card;
-      $orderCard['idOrderCard'] = Uuid::uuid();
-      $orderCard["roomID"] = $request->roomID;
-      $orderCard["idSessionGame"] = $request->idSessionGame;
-      $orderCard["idCard"] = $request->card[$i]->idCard;
-      $orderCard["position"] = $i; // la primera posicion sera el cero
-      $orderCard->save();
-    }
-  }
 }

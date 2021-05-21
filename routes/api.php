@@ -68,6 +68,7 @@ Route::get("Session_game/updateStatusCardInicio/{idSessionGame}",[Session_GameCo
 
 //Rutas de Session_Turn
 Route::post("Session_turn/makeSessionTurn",[Session_TurnController::class, 'makeSessionTurn'])->name('Session_turn.makeSessionTurn');
+Route::put("Session_turn/changeTurn",[Session_TurnController::class, 'changeTurn'])->name('Session_turn.changeTurn');
 
 //Rutas de Status_game
 Route::post("Status_game/makeStatus",[Status_GameController::class, 'makeStatus'])->name('Status_game.makeStatus');
