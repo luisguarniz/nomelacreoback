@@ -25,7 +25,7 @@ class startGame implements ShouldBroadcast
     
         $this->response = [
             'idSessionGame'=> $data['idSessionGame'],
-            'msgtrue'      => $data['msgtrue'],
+            'firstGamer'   => $data['firstGamer'],
             'to'           => $data['to'],
             'from'         => auth()->user(),
         ];

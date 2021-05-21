@@ -62,7 +62,7 @@ class RoomController extends Controller
       return $message;
     }
     return response()->json([
-
+      'roomID' => $room->roomID,
       'roomNameI' => $room->roomName,
       'roomCodeI' => $room->roomCode
     ]);

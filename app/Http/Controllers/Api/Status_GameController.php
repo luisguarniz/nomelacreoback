@@ -69,10 +69,12 @@ class Status_GameController extends Controller
         Status_game::where('status_games.idSessionGame', $request->idSessionGame)
             ->where('status_games.idUser', $request->idUser)
             ->update([
+                'elegirColor' => $request->elegirColor,
+                'noMelacreo' => $request->noMelacreo,
+                'siMelacreo' => $request->siMelacreo,
                 'masoCartas' => $request->masoCartas,
                 'cartasMesa' => $request->cartasMesa,
-                'siMelacreo' => $request->siMelacreo,
-                'noMelacreo' => $request->noMelacreo,
+                'resetGame' => $request->resetGame,
             ]);
 
             return response()->json([
@@ -85,10 +87,12 @@ class Status_GameController extends Controller
         Status_game::where('status_games.idSessionGame', $request->idSessionGame)
             ->where('status_games.idUser', $request->idUser)
             ->update([
+                'elegirColor' => $request->elegirColor,
+                'noMelacreo' => $request->noMelacreo,
+                'siMelacreo' => $request->siMelacreo,
                 'masoCartas' => $request->masoCartas,
                 'cartasMesa' => $request->cartasMesa,
-                'siMelacreo' => $request->siMelacreo,
-                'noMelacreo' => $request->noMelacreo,
+                'resetGame' => $request->resetGame,
             ]);
 
             return response()->json([
@@ -101,10 +105,11 @@ class Status_GameController extends Controller
         Status_game::where('status_games.idSessionGame', $request->idSessionGame)
             ->where('status_games.idUser', $request->idUser)
             ->update([
+            //    'elegirColor' => $request->elegirColor,
+                'siMelacreo' => $request->siMelacreo,
                 'masoCartas' => $request->masoCartas,
                 'cartasMesa' => $request->cartasMesa,
-                'siMelacreo' => $request->siMelacreo,
-                'noMelacreo' => $request->noMelacreo,
+              //  'resetGame' => $request->resetGame,
             ]);
             return response()->json([
                 'messagge' => "se actualizaron los estados despues de presionar el maso de cartas"
@@ -117,7 +122,7 @@ class Status_GameController extends Controller
             ->where('status_games.idUser', $request->idUser)
             ->update([
                 'masoCartas' => $request->masoCartas,
-                'elegirColor' => $request->elegirColor
+                
             ]);
 
             return response()->json([

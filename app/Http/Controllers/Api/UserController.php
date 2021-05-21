@@ -8,6 +8,7 @@ use App\Models\User;
 use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class UserController extends Controller
@@ -120,6 +121,18 @@ class UserController extends Controller
   
       return response()->json([
         'messagge' => "se modifico el nombre"
+      ]);
+    }
+
+    public function isAdmin(Request $request){
+     
+      $query = DB::table('users')
+      ->select('users.isAdmin')
+      ->where('users.id', $request->id)
+      ->first();
+   //   return $query;
+      return response()->json([
+        'isAdmin' => $query
       ]);
     }
 }

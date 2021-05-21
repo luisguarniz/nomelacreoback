@@ -24,9 +24,14 @@ class Session_TurnController extends Controller
         $sessionTurn["orderTurn"] = $i + 1;
         $sessionTurn->save();
         }
+        
         $idPrimerJugador = Session_turn::where('session_turns.idSessionGame', $request->idSessionGame)->get()->random();
+        Session_turn::where('session_turns.idUser', $idPrimerJugador->idUser)
+        ->update([
+          'turn' => true,
+        ]);
         return response()->json([
-            'el primero en jugar es el id' => $idPrimerJugador->idUser
+            'first' => $idPrimerJugador->idUser
           ]);
     }
 }

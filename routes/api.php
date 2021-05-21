@@ -27,6 +27,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //Rutas del Host
 Route::get("User/makeUser",[UserController::class, 'makeUser'])->name('User.makeUser');
+Route::get("User/isAdmin/{id}",[UserController::class, 'isAdmin'])->name('User.isAdmin');
 Route::post("User/loginHost",[UserController::class, 'loginHost'])->name('api.auth.login');
 Route::get('User/me',[UserController::class, 'me'])
 ->name('UserController.me')
@@ -57,9 +58,13 @@ Route::get("Room/getStatusbtnStopVoting/{roomCode}",[RoomController::class, 'get
 Route::get("Card/getCard/{idSessionGame}",[CardController::class, 'getCard'])->name('Card.getCard');
 Route::post("Card/moveCard",[CardController::class, 'moveCard'])->name('Card.moveCard');
 Route::get("Card/getOrderCards/{idSessionGame}",[CardController::class, 'getOrderCards'])->name('Card.getOrderCards');
+Route::post("Card/makeOrderCard",[CardController::class, 'makeOrderCard'])->name('Card.makeOrderCard');
 
-//Rutas de la session_game
+//Rutas de la session_game 
 Route::get("Session_game/makeSession/{roomID}",[Session_GameController::class, 'makeSession'])->name('Session_game.makeSession');
+Route::get("Session_game/makeGame/{idSessionGame}",[Session_GameController::class, 'makeGame'])->name('Session_game.makeGame');
+Route::get("Session_game/updateStatusCardInicio/{idSessionGame}",[Session_GameController::class, 'updateStatusCardInicio'])->name('Session_game.updateStatusCardInicio');
+
 
 //Rutas de Session_Turn
 Route::post("Session_turn/makeSessionTurn",[Session_TurnController::class, 'makeSessionTurn'])->name('Session_turn.makeSessionTurn');
@@ -67,10 +72,10 @@ Route::post("Session_turn/makeSessionTurn",[Session_TurnController::class, 'make
 //Rutas de Status_game
 Route::post("Status_game/makeStatus",[Status_GameController::class, 'makeStatus'])->name('Status_game.makeStatus');
 Route::post("Status_game/getStatus",[Status_GameController::class, 'getStatus'])->name('Status_game.getStatus');
-Route::post("Status_game/PressNomelacreo",[Status_GameController::class, 'PressNomelacreo'])->name('Status_game.PressNomelacreo');
-Route::post("Status_game/PressSimelacreo",[Status_GameController::class, 'PressSimelacreo'])->name('Status_game.PressSimelacreo');
-Route::post("Status_game/PressMasoCartas",[Status_GameController::class, 'PressMasoCartas'])->name('Status_game.PressMasoCartas');
-Route::post("Status_game/PressElegirColor",[Status_GameController::class, 'PressElegirColor'])->name('Status_game.PressElegirColor');
+Route::put("Status_game/PressNomelacreo",[Status_GameController::class, 'PressNomelacreo'])->name('Status_game.PressNomelacreo');
+Route::put("Status_game/PressSimelacreo",[Status_GameController::class, 'PressSimelacreo'])->name('Status_game.PressSimelacreo');
+Route::put("Status_game/PressMasoCartas",[Status_GameController::class, 'PressMasoCartas'])->name('Status_game.PressMasoCartas');
+Route::put("Status_game/PressElegirColor",[Status_GameController::class, 'PressElegirColor'])->name('Status_game.PressElegirColor');
 
 
 //ruta para enviar true cuando se mueve una carta
