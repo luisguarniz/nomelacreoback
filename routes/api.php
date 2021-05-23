@@ -77,7 +77,7 @@ Route::put("Status_game/PressNomelacreo",[Status_GameController::class, 'PressNo
 Route::put("Status_game/PressSimelacreo",[Status_GameController::class, 'PressSimelacreo'])->name('Status_game.PressSimelacreo');
 Route::put("Status_game/PressMasoCartas",[Status_GameController::class, 'PressMasoCartas'])->name('Status_game.PressMasoCartas');
 Route::put("Status_game/PressElegirColor",[Status_GameController::class, 'PressElegirColor'])->name('Status_game.PressElegirColor');
-
+Route::put("Status_game/nextTurn",[Status_GameController::class, 'nextTurn'])->name('Status_game.nextTurn');
 
 //rutas para difundir mensajes en Web sockets
 Route::post('Message/moveCard',[MessageController::class, 'moveCard'])

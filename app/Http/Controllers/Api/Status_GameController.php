@@ -87,12 +87,9 @@ class Status_GameController extends Controller
         Status_game::where('status_games.idSessionGame', $request->idSessionGame)
             ->where('status_games.idUser', $request->idUser)
             ->update([
-                'elegirColor' => $request->elegirColor,
-                'noMelacreo' => $request->noMelacreo,
+ 
                 'siMelacreo' => $request->siMelacreo,
-                'masoCartas' => $request->masoCartas,
-                'cartasMesa' => $request->cartasMesa,
-                'resetGame' => $request->resetGame,
+                'cartasMesa' => $request->cartasMesa
             ]);
 
             return response()->json([
@@ -107,6 +104,7 @@ class Status_GameController extends Controller
             ->update([
             //    'elegirColor' => $request->elegirColor,
                 'siMelacreo' => $request->siMelacreo,
+                'noMelacreo' => $request->noMelacreo,
                 'masoCartas' => $request->masoCartas,
                 'cartasMesa' => $request->cartasMesa,
               //  'resetGame' => $request->resetGame,
@@ -127,6 +125,22 @@ class Status_GameController extends Controller
 
             return response()->json([
                 'messagge' => "se actualizaron los estados despues de presionar elegir color"
+            ]);
+    }
+
+    public function nextTurn(Request $request)
+    {
+
+        Status_game::where('status_games.idSessionGame', $request->idSessionGame)
+            ->where('status_games.idUser', $request->idUser)
+            ->update([
+ 
+                'noMelacreo' => $request->noMelacreo,
+                'masoCartas' => $request->masoCartas
+            ]);
+
+            return response()->json([
+                'messagge' => "se actualizaron los estados nextTurn"
             ]);
     }
 }
