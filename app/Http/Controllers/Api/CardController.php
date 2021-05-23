@@ -74,7 +74,7 @@ class CardController extends Controller
 
     $orderCards = DB::table('order_cards')
     ->join('cards', 'cards.idCard', '=', 'order_cards.idCard')
-    ->select('cards.idCard','cards.cardName')
+    ->select('cards.*')
     ->where('order_cards.idSessionGame', $request->idSessionGame)
     ->orderBy('order_cards.position', 'asc')
     ->get();
@@ -100,5 +100,42 @@ class CardController extends Controller
     return response()->json([
       'message'  => "se creo el orden inicial con las dos cartas"
     ]);
+  }
+
+  public function compareCards(Request $request){
+
+
+
+
+    $ordenNomelaCreo = DB::table('order_cards')
+    ->join('cards', 'cards.idCard', '=', 'order_cards.idCard')
+    ->select('order_cards.*')
+    ->where('order_cards.idSessionGame', $request->idSessionGame)
+    ->orderBy('order_cards.position', 'asc')
+    ->get();
+
+    $ordenNomelaCreoCorrecto = DB::table('order_cards')
+    ->join('cards', 'cards.idCard', '=', 'order_cards.idCard')
+    ->select('order_cards.*')
+    ->where('order_cards.idSessionGame', $request->idSessionGame)
+    ->orderBy('cards.valueBlue', 'asc')
+    ->get();
+  
+ 
+
+    if ($ordenNomelaCreo == $ordenNomelaCreoCorrecto) {
+      return response()->json([
+        'message'  => "el orden es correcto",
+        '$ordenNomelaCreo' => $ordenNomelaCreo,
+        'ordenNomelaCreoCorrecto' => $ordenNomelaCreoCorrecto
+      ]);
+    }
+    else {
+      return response()->json([
+        'message'  => "el orden es incorrecto",
+        '$ordenNomelaCreo' => $ordenNomelaCreo,
+        'ordenNomelaCreoCorrecto' => $ordenNomelaCreoCorrecto
+      ]);
+    }
   }
 }
