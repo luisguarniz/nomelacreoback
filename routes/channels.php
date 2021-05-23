@@ -30,6 +30,10 @@ Broadcast::channel('startGame.{id}', function ($startGame) {
     return $startGame;
 });
 
+Broadcast::channel('siMelacreo.{id}', function ($siMelacreo) {
+    return $siMelacreo;
+});
+
 // ruta para cambiar nombre
 Broadcast::channel('changeName.{id}', function ($changeName) {
     return $changeName;

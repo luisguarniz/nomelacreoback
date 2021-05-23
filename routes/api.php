@@ -79,12 +79,15 @@ Route::put("Status_game/PressMasoCartas",[Status_GameController::class, 'PressMa
 Route::put("Status_game/PressElegirColor",[Status_GameController::class, 'PressElegirColor'])->name('Status_game.PressElegirColor');
 
 
-//ruta para enviar true cuando se mueve una carta
+//rutas para difundir mensajes en Web sockets
 Route::post('Message/moveCard',[MessageController::class, 'moveCard'])
 ->name('MessageController.moveCard')
 ->middleware('auth:api');
 
-//ruta para enviar true cuando se mueve una carta
 Route::post('Message/startGame',[MessageController::class, 'startGame'])
 ->name('MessageController.startGame')
+->middleware('auth:api');
+
+Route::post('Message/siMelacreo',[MessageController::class, 'siMelacreo'])
+->name('MessageController.siMelacreo')
 ->middleware('auth:api');

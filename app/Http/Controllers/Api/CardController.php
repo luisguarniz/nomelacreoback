@@ -74,7 +74,7 @@ class CardController extends Controller
 
     $orderCards = DB::table('order_cards')
     ->join('cards', 'cards.idCard', '=', 'order_cards.idCard')
-    ->select('cards.cardName')
+    ->select('cards.idCard','cards.cardName')
     ->where('order_cards.idSessionGame', $request->idSessionGame)
     ->orderBy('order_cards.position', 'asc')
     ->get();
