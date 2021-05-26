@@ -34,6 +34,10 @@ Broadcast::channel('siMelacreo.{id}', function ($siMelacreo) {
     return $siMelacreo;
 });
 
+Broadcast::channel('noMelacreo.{id}', function ($noMelacreo) {
+    return $noMelacreo;
+});
+
 // ruta para cambiar nombre
 Broadcast::channel('changeName.{id}', function ($changeName) {
     return $changeName;

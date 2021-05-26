@@ -30,6 +30,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get("User/makeUser",[UserController::class, 'makeUser'])->name('User.makeUser');
 Route::get("User/isAdmin/{id}",[UserController::class, 'isAdmin'])->name('User.isAdmin');
 Route::post("User/loginHost",[UserController::class, 'loginHost'])->name('api.auth.login');
+Route::get("User/getAdmin/{roomID}",[UserController::class, 'getAdmin'])->name('User.getAdmin');
 Route::get('User/me',[UserController::class, 'me'])
 ->name('UserController.me')
 ->middleware('auth:api');
@@ -97,4 +98,8 @@ Route::post('Message/startGame',[MessageController::class, 'startGame'])
 
 Route::post('Message/siMelacreo',[MessageController::class, 'siMelacreo'])
 ->name('MessageController.siMelacreo')
+->middleware('auth:api');
+
+Route::post('Message/noMelacreo',[MessageController::class, 'noMelacreo'])
+->name('MessageController.noMelacreo')
 ->middleware('auth:api');

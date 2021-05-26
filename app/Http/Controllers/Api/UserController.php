@@ -135,4 +135,17 @@ class UserController extends Controller
         'isAdmin' => $query
       ]);
     }
+
+    public function getAdmin(Request $request){
+
+      $query = DB::table('rooms')
+      ->select('rooms.idAdmin')
+      ->where('rooms.roomID', $request->roomID)
+      ->first();
+   //   return $query;
+      return response()->json([
+        'idAdmin' => $query
+      ]);
+
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Events\GameEvent;
 use App\Events\messageChangeName;
+use App\Events\noMelacreo;
 use App\Events\siMelacreo;
 use App\Events\startGame;
 use App\Http\Controllers\Controller;
@@ -37,6 +38,16 @@ class MessageController extends Controller
         // $data = $request->only(['msgUnblock','codigoSesion','to']);
  
          event(new siMelacreo($request));
+      
+         return response()->json([
+             'ok'  => true,
+             'message' => 'mensaje enviado correctamente noMelacreo Web socket',
+         ]);
+     }
+
+     public function noMelacreo(Request $request){
+ 
+         event(new noMelacreo($request));
       
          return response()->json([
              'ok'  => true,
