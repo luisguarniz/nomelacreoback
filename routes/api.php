@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\CardController;
 use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\RoomController;
+use App\Http\Controllers\Api\ScoreController;
 use App\Http\Controllers\Api\Session_GameController;
 use App\Http\Controllers\Api\Session_TurnController;
 use App\Http\Controllers\Api\Status_GameController;
@@ -59,7 +60,7 @@ Route::get("Card/getCard/{idSessionGame}",[CardController::class, 'getCard'])->n
 Route::post("Card/moveCard",[CardController::class, 'moveCard'])->name('Card.moveCard');
 Route::get("Card/getOrderCards/{idSessionGame}",[CardController::class, 'getOrderCards'])->name('Card.getOrderCards');
 Route::post("Card/makeOrderCard",[CardController::class, 'makeOrderCard'])->name('Card.makeOrderCard');
-Route::get("Card/compareCards/{idSessionGame}",[CardController::class, 'compareCards'])->name('Card.compareCards');
+Route::put("Card/compareCards",[CardController::class, 'compareCards'])->name('Card.compareCards');
 
 //Rutas de la session_game 
 Route::get("Session_game/makeSession/{roomID}",[Session_GameController::class, 'makeSession'])->name('Session_game.makeSession');
@@ -70,6 +71,7 @@ Route::get("Session_game/updateStatusCardInicio/{idSessionGame}",[Session_GameCo
 //Rutas de Session_Turn
 Route::post("Session_turn/makeSessionTurn",[Session_TurnController::class, 'makeSessionTurn'])->name('Session_turn.makeSessionTurn');
 Route::put("Session_turn/changeTurn",[Session_TurnController::class, 'changeTurn'])->name('Session_turn.changeTurn');
+Route::get("Session_turn/getTurn/{idSessionGame}",[Session_TurnController::class, 'getTurn'])->name('Session_turn.getTurn');
 
 //Rutas de Status_game
 Route::post("Status_game/makeStatus",[Status_GameController::class, 'makeStatus'])->name('Status_game.makeStatus');
@@ -79,6 +81,10 @@ Route::put("Status_game/PressSimelacreo",[Status_GameController::class, 'PressSi
 Route::put("Status_game/PressMasoCartas",[Status_GameController::class, 'PressMasoCartas'])->name('Status_game.PressMasoCartas');
 Route::put("Status_game/PressElegirColor",[Status_GameController::class, 'PressElegirColor'])->name('Status_game.PressElegirColor');
 Route::put("Status_game/nextTurn",[Status_GameController::class, 'nextTurn'])->name('Status_game.nextTurn');
+
+//rutas de Score
+Route::post("Score/makeScore",[ScoreController::class, 'makeScore'])->name('Score.makeScore');
+
 
 //rutas para difundir mensajes en Web sockets
 Route::post('Message/moveCard',[MessageController::class, 'moveCard'])

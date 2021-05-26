@@ -12,6 +12,9 @@ class Session_TurnController extends Controller
 {
     public function makeSessionTurn(Request $request){
          
+      //creamos y asignamos un numero de posicion para cada jugador
+      //no quiere decir que el jugador con posicion uno va ser el primero en 
+      //esto quiere decir que el admin tendra el numero menor siempre pero no sera el primero en jugar siempre
         $alluser = array();
         $tunrInicial = false;
         $orderTurnInicial = 1;
@@ -26,7 +29,11 @@ class Session_TurnController extends Controller
         $sessionTurn->save();
         }
         
+        //elejimos un numero de los jugadores para que empiece a jugar
+        //luego seguira el numero siguiente en jugar
         $idPrimerJugador = Session_turn::where('session_turns.idSessionGame', $request->idSessionGame)->get()->random();
+
+
         Session_turn::where('session_turns.idUser', $idPrimerJugador->idUser)
         ->update([
           'turn' => true,
@@ -91,4 +98,16 @@ class Session_TurnController extends Controller
           'nextTurn' => $nextTurn
         ]);
     }
+
+    public function getTurn(Request $request){
+
+       $inTurn = Session_turn::where('session_turns.idSessionGame', $request->idSessionGame)
+       ->where('session_turns.turn', true)->first();
+
+       return response()->json([
+        'turn' => $inTurn
+      ]);
+    }
+
+
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Card;
 use App\Models\Game;
 use App\Models\Order_card;
+use App\Models\Score;
 use App\Models\Session_turn;
 use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
@@ -124,13 +125,101 @@ class CardController extends Controller
  
 
     if ($ordenNomelaCreo == $ordenNomelaCreoCorrecto) {
-      return response()->json([
-        'message'  => "el orden es correcto",
-        '$ordenNomelaCreo' => $ordenNomelaCreo,
-        'ordenNomelaCreoCorrecto' => $ordenNomelaCreoCorrecto
+
+      //esto quiere decir que el jugador no adivino entonces se le sumara un punto al jugador anterior
+      //ubico al jugador anterior
+
+            //consulto el turno del jugador que a presionado
+            $orderTurnActual = DB::table('session_turns')
+            ->select('session_turns.orderTurn')
+            ->where('session_turns.idSessionGame', $request->idSessionGame)
+            ->where('session_turns.idUser', $request->idUser)
+            ->first();
+      
+
+            //consulto el jugador anterior y almaceno en la variable orderTurnAnterior
+            $orderTurnAnterior = Session_turn::where('session_turns.orderTurn', $orderTurnActual->orderTurn - 1)->first();
+
+            //pregunto si existe o no este turno ya que si me devuelve null entonces estaria tocandole al que tiene el turno mas alto
+            if ($orderTurnAnterior == null) {
+
+              //ubico el turno mas alto
+              $MAXturn = Session_turn::where('session_turns.idSessionGame', $request->idSessionGame)
+              ->max('orderTurn');
+
+
+
+              $idUserMAX = Session_turn::where('idSessionGame', $request->idSessionGame)
+              ->where('orderTurn', $MAXturn)
+              ->first();
+        
+
+                    //traemos el score del usuario que acerto
+               $scoredeusuario = DB::table('scores')
+              ->select('scores.score')
+              ->where('scores.roomID', $request->roomID)
+              ->where('scores.idUser', $idUserMAX->idUser)
+              ->first();
+
+                  //le sumamos uno al usuario anterior
+              Score::where('scores.roomID', $request->roomID)
+               ->where('scores.idUser', $idUserMAX->idUser)
+               ->update([
+               'score' => $scoredeusuario->score + 1
+                       ]);
+
+      
+    }else{
+      //el el turno anterior no es nulo
+
+      $idAnterior = DB::table('session_turns')
+      ->select('session_turns.idUser')
+      ->where('session_turns.idSessionGame', $request->idSessionGame)
+      ->where('session_turns.orderTurn', $orderTurnAnterior->orderTurn)
+      ->first();
+
+      //traemos el score del usuario anterior
+      $scoredeusuarioAnterior = DB::table('scores')
+      ->select('scores.score')
+      ->where('scores.roomID', $request->roomID)
+      ->where('scores.idUser', $idAnterior->idUser)
+      ->first();
+
+      Score::where('scores.roomID', $request->roomID)
+      ->where('scores.idUser', $idAnterior->idUser)
+      ->update([
+        'score' => $scoredeusuarioAnterior->score + 1
       ]);
+
     }
+
+    return response()->json([
+      'message'  => "el orden es correcto",
+      '$ordenNomelaCreo' => $ordenNomelaCreo,
+      'ordenNomelaCreoCorrecto' => $ordenNomelaCreoCorrecto
+    ]);
+  }
     else {
+
+    //esto quiere decir que el jugador adivino que estaba mal el orden entonces se le sumara un punto
+
+
+      
+      //traemos el score del usuario que acerto
+      $scoredeusuario = DB::table('scores')
+      ->select('scores.score')
+      ->where('scores.roomID', $request->roomID)
+      ->where('scores.idUser', $request->idUser)
+      ->first();
+
+    //le sumamos uno al usuario que acerto
+      Score::where('scores.roomID', $request->roomID)
+      ->where('scores.idUser', $request->idUser)
+      ->update([
+        'score' => $scoredeusuario->score + 1
+      ]);
+
+      //devolvemos los dos arreglos comparados
       return response()->json([
         'message'  => "el orden es incorrecto",
         '$ordenNomelaCreo' => $ordenNomelaCreo,

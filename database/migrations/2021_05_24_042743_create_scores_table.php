@@ -14,7 +14,7 @@ class CreateScoresTable extends Migration
     public function up()
     {
         Schema::create('scores', function (Blueprint $table) {
-            $table->uuid("idTurn")->primary();
+            $table->uuid("idScore")->primary();
             $table->uuid('roomID')->nullable();
             $table->unsignedBigInteger('idUser')->nullable();
             $table->integer("score")->default('0');
