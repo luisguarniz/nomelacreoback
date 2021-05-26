@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Score;
 use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ScoreController extends Controller
 {
@@ -27,5 +28,20 @@ class ScoreController extends Controller
             'message'  => "se inicializaron los campos en score"
           ]);
 }
+
+public function getScore(Request $request){
+
+    $scors = DB::table('scores')
+    ->join('users', 'users.id', '=', 'scores.idUser')
+    ->select('users.customName','scores.score')
+    ->where('scores.roomID', $request->roomID)
+    ->orderBy('scores.score', 'desc')
+    ->get();
+    return response()->json([
+    'scors' => $scors
+    ]);
+}
+
+
 
 }

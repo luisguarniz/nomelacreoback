@@ -84,7 +84,7 @@ Route::put("Status_game/nextTurn",[Status_GameController::class, 'nextTurn'])->n
 
 //rutas de Score
 Route::post("Score/makeScore",[ScoreController::class, 'makeScore'])->name('Score.makeScore');
-
+Route::get("Score/getScore/{roomID}",[ScoreController::class, 'getScore'])->name('Score.getScore');
 
 //rutas para difundir mensajes en Web sockets
 Route::post('Message/moveCard',[MessageController::class, 'moveCard'])
