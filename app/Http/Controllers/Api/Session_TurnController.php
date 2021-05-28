@@ -71,11 +71,14 @@ class Session_TurnController extends Controller
         'turn' => true,
       ]);
 
-      $nextTurn = Session_turn::where('session_turns.idSessionGame', $request->idSessionGame)
-      ->where('session_turns.orderTurn', 1)->first();
-
+      $nextTurn = DB::table('session_turns')
+      ->select('session_turns.idUser')
+      ->where('session_turns.idSessionGame', $request->idSessionGame)
+      ->where('session_turns.orderTurn', 1)
+      ->first();
+      
       return response()->json([
-        'nextTurn' => $nextTurn->idUser
+        'nextTurn' => $nextTurn
       ]);
 
       }
