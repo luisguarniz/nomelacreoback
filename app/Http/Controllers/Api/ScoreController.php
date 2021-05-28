@@ -12,20 +12,28 @@ class ScoreController extends Controller
 {
     public function makeScore(Request $request){
          
-        $alluser = array();
-        $alluser = $request->idsParticipantes;
-        for ($i=0; $i < count($alluser); $i++) { 
-        $score = new Score;
-        $score["idScore"] = Uuid::uuid();
-        $score["roomID"] = $request->roomID;
-        $score["idUser"] = $alluser[$i];
-        $score["score"] = 0;
-        $score["isActive"] = true;
-        $score->save();
-        }
+        $existe = Score::where('roomID', $request->roomID)->first();
 
-        return response()->json([
-            'message'  => "se inicializaron los campos en score"
+        if ($existe == null) {
+            
+            $alluser = array();
+            $alluser = $request->idsParticipantes;
+            for ($i=0; $i < count($alluser); $i++) { 
+            $score = new Score;
+            $score["idScore"] = Uuid::uuid();
+            $score["roomID"] = $request->roomID;
+            $score["idUser"] = $alluser[$i];
+            $score["score"] = 0;
+            $score["isActive"] = true;
+            $score->save();
+            }
+    
+            return response()->json([
+                'message'  => "se inicializaron los campos en score"
+              ]);
+        }
+          return response()->json([
+            'message'  => "ya existe un registro"
           ]);
 }
 
