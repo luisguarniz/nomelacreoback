@@ -148,4 +148,16 @@ class UserController extends Controller
       ]);
 
     }
+
+    public function getUserTurn(Request $request){
+     
+      $customName = DB::table('users')
+      ->select('users.customName')
+      ->where('users.id', $request->id)
+      ->first();
+   //   return $query;
+      return response()->json([
+        'customName' => $customName
+      ]);
+    }
 }

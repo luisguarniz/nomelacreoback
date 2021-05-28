@@ -29,6 +29,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Rutas del Host
 Route::get("User/makeUser",[UserController::class, 'makeUser'])->name('User.makeUser');
 Route::get("User/isAdmin/{id}",[UserController::class, 'isAdmin'])->name('User.isAdmin');
+Route::get("User/getUserTurn/{id}",[UserController::class, 'getUserTurn'])->name('User.getUserTurn');
 Route::post("User/loginHost",[UserController::class, 'loginHost'])->name('api.auth.login');
 Route::get("User/getAdmin/{roomID}",[UserController::class, 'getAdmin'])->name('User.getAdmin');
 Route::get('User/me',[UserController::class, 'me'])
