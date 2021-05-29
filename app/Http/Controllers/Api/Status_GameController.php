@@ -69,12 +69,8 @@ class Status_GameController extends Controller
         Status_game::where('status_games.idSessionGame', $request->idSessionGame)
             ->where('status_games.idUser', $request->idUser)
             ->update([
-                'elegirColor' => $request->elegirColor,
                 'noMelacreo' => $request->noMelacreo,
-                'siMelacreo' => $request->siMelacreo,
                 'masoCartas' => $request->masoCartas,
-                'cartasMesa' => $request->cartasMesa,
-                'resetGame' => $request->resetGame,
             ]);
 
             return response()->json([
@@ -141,6 +137,21 @@ class Status_GameController extends Controller
 
             return response()->json([
                 'messagge' => "se actualizaron los estados nextTurn"
+            ]);
+    }
+
+
+    public function statusElegirColor(Request $request)
+    {
+
+        Status_game::where('status_games.idSessionGame', $request->idSessionGame)
+            ->where('status_games.idUser', $request->idUser)
+            ->update([
+                'elegirColor' => $request->elegirColor
+            ]);
+
+            return response()->json([
+                'messagge' => "se actualiza el boton elegir color al presionar no me lo creo"
             ]);
     }
 }
