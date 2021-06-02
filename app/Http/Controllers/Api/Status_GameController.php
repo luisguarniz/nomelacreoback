@@ -53,8 +53,8 @@ class Status_GameController extends Controller
     public function getStatus(Request $request)
     {
 
-        $status = Status_game::where('status_games.idUser', $request->idUser)
-            //->where('status_games.idSessionGame', $request->idSessionGame)
+        $status = Status_game::where('status_games.idSessionGame', $request->idSessionGame)
+            ->where('status_games.idUser', $request->idUser)
             ->first();
 
         return response()->json([

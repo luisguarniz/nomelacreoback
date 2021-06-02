@@ -77,7 +77,7 @@ Route::get("Session_turn/getTurn/{idSessionGame}",[Session_TurnController::class
 
 //Rutas de Status_game
 Route::post("Status_game/makeStatus",[Status_GameController::class, 'makeStatus'])->name('Status_game.makeStatus');
-Route::post("Status_game/getStatus",[Status_GameController::class, 'getStatus'])->name('Status_game.getStatus');
+Route::put("Status_game/getStatus",[Status_GameController::class, 'getStatus'])->name('Status_game.getStatus');
 Route::put("Status_game/PressNomelacreo",[Status_GameController::class, 'PressNomelacreo'])->name('Status_game.PressNomelacreo');
 Route::put("Status_game/PressSimelacreo",[Status_GameController::class, 'PressSimelacreo'])->name('Status_game.PressSimelacreo');
 Route::put("Status_game/PressMasoCartas",[Status_GameController::class, 'PressMasoCartas'])->name('Status_game.PressMasoCartas');

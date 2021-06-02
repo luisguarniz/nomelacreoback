@@ -38,6 +38,11 @@ class Session_GameController extends Controller
     ]);
   }
 
+  public function getSessionGame(Request $request){
+
+    
+  }
+
   public function makeGame(Request $request)
   {
     //////////////////////////creo la tabla game////////////////////////////////////////////////////
@@ -73,6 +78,16 @@ class Session_GameController extends Controller
     return response()->json([
       'card'  => $card,
       //'idSessionGame' => $request->idSessionGame
+    ]);
+  }
+
+
+  // al presionar nomeLacreo se tiene que desactivar
+  public function desactivateSession(Request $request)
+  {
+
+    $room = Session_game::where('idSessionGame', $request->idSessionGame)->update([
+      'IsActive' => '0'
     ]);
   }
 
