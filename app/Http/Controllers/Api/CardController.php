@@ -115,12 +115,37 @@ class CardController extends Controller
     ->orderBy('order_cards.position', 'asc')
     ->get();
 
-    $ordenNomelaCreoCorrecto = DB::table('order_cards')
-    ->join('cards', 'cards.idCard', '=', 'order_cards.idCard')
-    ->select('order_cards.*')
-    ->where('order_cards.idSessionGame', $request->idSessionGame)
-    ->orderBy('cards.valueBlue', 'asc')
-    ->get();
+    //este es si se esta jugando con el color azul
+    if ($request->colorRandom == "Celeste") {
+      $ordenNomelaCreoCorrecto = DB::table('order_cards')
+      ->join('cards', 'cards.idCard', '=', 'order_cards.idCard')
+      ->select('order_cards.*')
+      ->where('order_cards.idSessionGame', $request->idSessionGame)
+      ->orderBy('cards.valueBlue', 'asc')
+      ->get();
+    }else if ($request->colorRandom == "Rojo") {
+      $ordenNomelaCreoCorrecto = DB::table('order_cards')
+      ->join('cards', 'cards.idCard', '=', 'order_cards.idCard')
+      ->select('order_cards.*')
+      ->where('order_cards.idSessionGame', $request->idSessionGame)
+      ->orderBy('cards.valueRed', 'asc')
+      ->get();
+    }else if ($request->colorRandom == "Verde") {
+      $ordenNomelaCreoCorrecto = DB::table('order_cards')
+      ->join('cards', 'cards.idCard', '=', 'order_cards.idCard')
+      ->select('order_cards.*')
+      ->where('order_cards.idSessionGame', $request->idSessionGame)
+      ->orderBy('cards.valueGreen', 'asc')
+      ->get();
+    }else if ($request->colorRandom == "Amarillo") {
+      $ordenNomelaCreoCorrecto = DB::table('order_cards')
+      ->join('cards', 'cards.idCard', '=', 'order_cards.idCard')
+      ->select('order_cards.*')
+      ->where('order_cards.idSessionGame', $request->idSessionGame)
+      ->orderBy('cards.valueYellow', 'asc')
+      ->get();
+    }
+
   
  
 
