@@ -41,7 +41,7 @@ public function getScore(Request $request){
 
     $scors = DB::table('scores')
     ->join('users', 'users.id', '=', 'scores.idUser')
-    ->select('users.customName','scores.score')
+    ->select('users.customName','scores.score','scores.idUser')
     ->where('scores.roomID', $request->roomID)
     ->orderBy('scores.score', 'desc')
     ->get();
