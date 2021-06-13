@@ -88,6 +88,7 @@ Route::put("Status_game/statusElegirColor",[Status_GameController::class, 'statu
 //rutas de Score
 Route::post("Score/makeScore",[ScoreController::class, 'makeScore'])->name('Score.makeScore');
 Route::get("Score/getScore/{roomID}",[ScoreController::class, 'getScore'])->name('Score.getScore');
+Route::get("Score/getIdUserScore/{roomID}",[ScoreController::class, 'getIdUserScore'])->name('Score.getIdUserScore');
 
 //rutas para difundir mensajes en Web sockets
 Route::post('Message/moveCard',[MessageController::class, 'moveCard'])

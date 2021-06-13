@@ -11,10 +11,19 @@ use Illuminate\Support\Facades\DB;
 class ScoreController extends Controller
 {
     public function makeScore(Request $request){
-         
-        $existe = Score::where('roomID', $request->roomID)->first();
 
-        if ($existe == null) {
+      $idsJugando = array();
+      $idsEntrantes = array();
+      $idsParticipantes = $request->idsParticipantes;
+
+        $existe = array();
+        $existe = DB::table('scores')
+        ->select('idUser')
+        ->where('roomID', $request->roomID)
+        ->get();
+ 
+
+        if (sizeof($existe) == 0) {
             
             $alluser = array();
             $alluser = $request->idsParticipantes;
@@ -31,10 +40,43 @@ class ScoreController extends Controller
             return response()->json([
                 'message'  => "se inicializaron los campos en score"
               ]);
-        }
+        }else if (sizeof($existe) !== 0) 
+        {
+          for ($i=0; $i < count($existe); $i++) { 
+            array_push($idsJugando,$existe[$i]->idUser);
+          }
+
+          //buscamos ids diferentes entre los dos array para insertarlo a la tabla de scores
+          $idsEntrantes = array_diff($idsParticipantes, $idsJugando);
+
+
+          if (count($idsEntrantes) > 0) {
+
+            for ($i=0; $i < count($idsEntrantes) ; $i++) { 
+              $score = new Score;
+              $score["idScore"] = Uuid::uuid();
+              $score["roomID"] = $request->roomID;
+              $score["idUser"] = $idsEntrantes[$i+1];
+              $score["score"] = 0;
+              $score["isActive"] = true;
+              $score->save();
+            }
           return response()->json([
-            'message'  => "ya existe un registro"
+            'message'  => "se inserto un nuevo jugaor",
+            '$idEntrante' => $idsEntrantes
           ]);
+
+          }
+
+          if (count($idsEntrantes) == 0) {
+            return response()->json([
+              'message'  => "ya existe un registro",
+              '$idsParticipantes' => $idsJugando,
+              '$existe' => $existe,
+              '$request->idsParticipantes' =>$idsParticipantes
+            ]);
+          }
+        }
 }
 
 public function getScore(Request $request){
@@ -50,6 +92,17 @@ public function getScore(Request $request){
     ]);
 }
 
+public function getIdUserScore(Request $request){
+
+  $scors = DB::table('scores')
+  ->join('users', 'users.id', '=', 'scores.idUser')
+  ->select('users.id')
+  ->where('scores.roomID', $request->roomID)
+  ->get();
+  return response()->json([
+  'scors' => $scors
+  ]);
+}
 
 
 }
