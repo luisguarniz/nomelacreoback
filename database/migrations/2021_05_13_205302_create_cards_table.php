@@ -16,10 +16,10 @@ class CreateCardsTable extends Migration
         Schema::create('cards', function (Blueprint $table) {
             $table->uuid("idCard")->primary();
             $table->string('cardName');
-            $table->integer('valueBlue');
             $table->integer('valueRed');
-            $table->integer('valueGreen');
             $table->integer('valueYellow');
+            $table->integer('valueGreen');
+            $table->integer('valueBlue');
             $table->boolean('statusCard');
             $table->timestamps();
         });

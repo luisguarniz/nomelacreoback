@@ -43,6 +43,11 @@ Broadcast::channel('changeName.{id}', function ($changeName) {
     return $changeName;
 });
 
+
+Broadcast::channel('observador.{id}', function ($observador) {
+    return $observador;
+});
+
 // TODO: validar existencia del usuario
 Broadcast::channel('votation.{id}', function ($user, $id) {
    return (int) $user->AdminUserCode === (int) $id;

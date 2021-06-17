@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Events\GameEvent;
 use App\Events\messageChangeName;
 use App\Events\noMelacreo;
+use App\Events\observador;
 use App\Events\siMelacreo;
 use App\Events\startGame;
 use App\Http\Controllers\Controller;
@@ -65,6 +66,16 @@ class MessageController extends Controller
               'message' => 'mensaje para cambiar el nombre enviado correctamente',
           ]);
       }
+
+      public function observador(Request $request){
+ 
+         event(new observador($request));
+      
+         return response()->json([
+             'ok'  => true,
+             'message' => 'mensaje enviado correctamente observador',
+         ]);
+     }
 }
 
 

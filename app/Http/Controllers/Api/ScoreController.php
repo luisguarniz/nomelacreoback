@@ -47,7 +47,8 @@ class ScoreController extends Controller
           }
 
           //buscamos ids diferentes entre los dos array para insertarlo a la tabla de scores
-          $idsEntrantes = array_diff($idsParticipantes, $idsJugando);
+          //con array_values quitamos los indices por que aparecian apartir de 1 o 2
+          $idsEntrantes = array_values(array_diff($idsParticipantes, $idsJugando));
 
 
           if (count($idsEntrantes) > 0) {
@@ -56,13 +57,13 @@ class ScoreController extends Controller
               $score = new Score;
               $score["idScore"] = Uuid::uuid();
               $score["roomID"] = $request->roomID;
-              $score["idUser"] = $idsEntrantes[$i+1];
+              $score["idUser"] = $idsEntrantes[$i];
               $score["score"] = 0;
               $score["isActive"] = true;
               $score->save();
             }
           return response()->json([
-            'message'  => "se inserto un nuevo jugaor",
+            'message'  => "se inserto un nuevo jugador",
             '$idEntrante' => $idsEntrantes
           ]);
 

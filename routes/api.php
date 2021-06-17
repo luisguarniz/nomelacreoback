@@ -106,3 +106,7 @@ Route::post('Message/siMelacreo',[MessageController::class, 'siMelacreo'])
 Route::post('Message/noMelacreo',[MessageController::class, 'noMelacreo'])
 ->name('MessageController.noMelacreo')
 ->middleware('auth:api');
+
+Route::post('Message/observador',[MessageController::class, 'observador'])
+->name('MessageController.observador')
+->middleware('auth:api');
