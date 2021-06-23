@@ -89,6 +89,7 @@ Route::put("Status_game/statusElegirColor",[Status_GameController::class, 'statu
 Route::post("Score/makeScore",[ScoreController::class, 'makeScore'])->name('Score.makeScore');
 Route::get("Score/getScore/{roomID}",[ScoreController::class, 'getScore'])->name('Score.getScore');
 Route::get("Score/getIdUserScore/{roomID}",[ScoreController::class, 'getIdUserScore'])->name('Score.getIdUserScore');
+Route::get("Score/resetScore/{roomID}",[ScoreController::class, 'resetScore'])->name('Score.resetScore');
 
 //rutas para difundir mensajes en Web sockets
 Route::post('Message/moveCard',[MessageController::class, 'moveCard'])
@@ -109,4 +110,8 @@ Route::post('Message/noMelacreo',[MessageController::class, 'noMelacreo'])
 
 Route::post('Message/observador',[MessageController::class, 'observador'])
 ->name('MessageController.observador')
+->middleware('auth:api');
+
+Route::post('Message/resetGame',[MessageController::class, 'resetGame'])
+->name('MessageController.resetGame')
 ->middleware('auth:api');

@@ -29,6 +29,9 @@ Broadcast::channel('room.{id}', function ($room) {
 Broadcast::channel('startGame.{id}', function ($startGame) {
     return $startGame;
 });
+Broadcast::channel('resetGame.{id}', function ($resetGame) {
+    return $resetGame;
+});
 
 Broadcast::channel('siMelacreo.{id}', function ($siMelacreo) {
     return $siMelacreo;

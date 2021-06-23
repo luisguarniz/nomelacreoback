@@ -105,5 +105,14 @@ public function getIdUserScore(Request $request){
   ]);
 }
 
+public function resetScore(Request $request){
 
+  $respuesta = Score::where('roomID', $request->roomID)->update([
+    'score' => '0'
+  ]);
+
+  return response()->json([
+    'respuesta' => $respuesta
+    ]);
+  }
 }

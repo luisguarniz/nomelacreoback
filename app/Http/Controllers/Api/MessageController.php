@@ -6,6 +6,7 @@ use App\Events\GameEvent;
 use App\Events\messageChangeName;
 use App\Events\noMelacreo;
 use App\Events\observador;
+use App\Events\resetGame;
 use App\Events\siMelacreo;
 use App\Events\startGame;
 use App\Http\Controllers\Controller;
@@ -32,6 +33,14 @@ class MessageController extends Controller
          return response()->json([
              'ok'  => true,
              'message' => 'mensaje enviado correctamente startGame',
+         ]);
+     }
+     public function resetGame(Request $request){
+         event(new resetGame($request));
+      
+         return response()->json([
+             'ok'  => true,
+             'message' => 'mensaje enviado correctamente resetGame',
          ]);
      }
 
