@@ -63,6 +63,7 @@ Route::post("Card/moveCard",[CardController::class, 'moveCard'])->name('Card.mov
 Route::get("Card/getOrderCards/{idSessionGame}",[CardController::class, 'getOrderCards'])->name('Card.getOrderCards');
 Route::post("Card/makeOrderCard",[CardController::class, 'makeOrderCard'])->name('Card.makeOrderCard');
 Route::put("Card/compareCards",[CardController::class, 'compareCards'])->name('Card.compareCards');
+Route::get("Card/deleteOrderCards/{idSessionGame}",[CardController::class, 'deleteOrderCards'])->name('Card.deleteOrderCards');
 
 //Rutas de la session_game 
 Route::get("Session_game/makeSession/{roomID}",[Session_GameController::class, 'makeSession'])->name('Session_game.makeSession');

@@ -103,9 +103,16 @@ class CardController extends Controller
     ]);
   }
 
+  public function deleteOrderCards(Request $request){
+   
+    $respuesta = Order_card::where('idSessionGame', $request->idSessionGame)->delete();
+    return response()->json([
+      'respuesta'  => "respuesta al eliminar deleteOrderCards",
+      '$respuesta' => $respuesta
+    ]);
+  }
+
   public function compareCards(Request $request){
-
-
 
 
     $ordenNomelaCreo = DB::table('order_cards')
