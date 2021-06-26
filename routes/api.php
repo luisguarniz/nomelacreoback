@@ -59,6 +59,7 @@ Route::get("Room/getStatusbtnVoting/{roomCode}",[RoomController::class, 'getStat
 Route::put("Room/changeStatusbtnStopVoting",[RoomController::class, 'changeStatusbtnStopVoting'])->name('Room.changeStatusbtnStopVoting');
 Route::get("Room/getStatusbtnStopVoting/{roomCode}",[RoomController::class, 'getStatusbtnStopVoting'])->name('Room.getStatusbtnStopVoting');
 
+Route::get("Room/makeRoomSolo/{idParticipantes}",[RoomController::class, 'makeRoomSolo'])->name('Room.makeRoomSolo');
 
 //Rutas de las cartas
 Route::get("Card/getCard/{idSessionGame}",[CardController::class, 'getCard'])->name('Card.getCard');

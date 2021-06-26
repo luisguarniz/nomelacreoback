@@ -20,6 +20,7 @@ class CreateRoomsTable extends Migration
             $table->string('roomName');
             $table->string('roomCode');
             $table->boolean('isActive')->default('1');
+            $table->string('codeBots')->nullable();
             $table->timestamps();
             
 

@@ -85,103 +85,39 @@ class RoomController extends Controller
     ]);
   }
 
-/*
-  public function makeStatus(Request $request)
-  {
-      $this->newStatu = new Statu();
-      $this->newStatu->RoomCode = $request->RoomCode;
-      $this->newStatu->save();
-
-      return response()->json([
-          'message' => "Se creo un registro para estado"
-      ]);
-  }
-  */
-
-/*  public function changeStatusCartas(Request $request)
+  //metodo para jugar solo
+  public function makeRoomSolo(Request $request)
   {
 
+    $arregloidParticipantes = explode(",", $request->idParticipantes);
 
-    $newName = Statu::where('status.RoomCode', $request->RoomCode)
-      ->update([
-        'bloquear' => $request->bloquear
-      ]);
+    //se necesita crear tantas salas como usuarios y adicionarle un codigo unico a todos para consultar al grupo de usuarios
 
+    $ciudad = City::all()->random(); // con este metodo traigo un registro random
+    $nomCiudad = $ciudad->cityName;
+    $permitted_chars2 = '0123456789';
+    $roomName = $nomCiudad . '-' . substr(str_shuffle($permitted_chars2), 0, 4);
+
+
+    $permitted_chars3 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $roomCodeLetras = substr(str_shuffle($permitted_chars3), 0, 3);
+    $permitted_chars4 = '0123456789';
+    $roomCodeNumeros = substr(str_shuffle($permitted_chars4), 0, 3); //guardamos los caracteres aleatorios
+
+    $permitted_chars3 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $roomcodeBots= substr(str_shuffle($permitted_chars3), 0, 8);
+
+    for ($i=0; $i <count($arregloidParticipantes); $i++) { 
+      $newRoom = new Room;
+      $newRoom->roomID =   Uuid::uuid();
+      $newRoom->idAdmin =  $arregloidParticipantes[$i]; // es lo que traigo en los parametros de la funcion
+      $newRoom->roomName = $roomName;
+      $newRoom->roomCode = $roomCodeLetras . $roomCodeNumeros;
+      $newRoom->codeBots = $roomcodeBots;
+      $newRoom->save();
+    }
     return response()->json([
-      'messagge' => "se modifico el estado"
-    ]);
-  }*/
-
- /* public function getStatusCartas(Request $request)
-  {
-
-        $query = DB::table('status')
-            ->select('status.bloquear')
-            ->where('status.RoomCode', $request->RoomCode)
-            ->get();
-         //   return $query;
-            return response()->json([
-              'bloquear' => $query
-            ]);
-  }*/
-
-
- /* public function changeStatusbtnVoting(Request $request)
-  {
-
-
-    $newName = Statu::where('status.RoomCode', $request->RoomCode)
-      ->update([
-        'StarVotingStatus' => $request->StarVotingStatus,
-        'StopVotingStatus' => $request->StopVotingStatus
-      ]);
-
-    return response()->json([
-      'messagge' => "se modifico el estado del boton star voting"
+      'msg'=> "se crearon los room"
     ]);
   }
-*/
- /* public function getStatusbtnVoting(Request $request)
-  {
-
-        $query = DB::table('status')
-            ->select('status.StarVotingStatus')
-            ->where('status.RoomCode', $request->RoomCode)
-            ->get();
-         //   return $query;
-            return response()->json([
-              'StarVotingStatus' => $query
-            ]);
-  }
-*/
-/*
-  public function changeStatusbtnStopVoting(Request $request)
-  {
-
-
-    $newName = Statu::where('status.RoomCode', $request->RoomCode)
-      ->update([
-        'StopVotingStatus' => $request->StopVotingStatus,
-        'StarVotingStatus' => $request->StarVotingStatus 
-      ]);
-
-    return response()->json([
-      'messagge' => "se modifico el estado del boton Stop Voting"
-    ]);
-  }
-*/
-/*
-  public function getStatusbtnStopVoting(Request $request)
-  {
-
-        $query = DB::table('status')
-            ->select('status.StopVotingStatus')
-            ->where('status.RoomCode', $request->RoomCode)
-            ->get();
-         //   return $query;
-            return response()->json([
-              'StopVotingStatus' => $query
-            ]);
-  }
-  */
 }
