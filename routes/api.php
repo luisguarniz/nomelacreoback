@@ -40,6 +40,9 @@ Route::put("User/editNameUser",[UserController::class, 'editNameUser'])->name('u
 //Rutas del Invited
 Route::get("User/makeInvited",[UserController::class, 'makeInvited'])->name('User.makeInvited');
 
+//Rutas Modo Solo
+Route::get("User/makeUsers/{nroParticipantes}",[UserController::class, 'makeUsers'])->name('User.makeUsers');
+
 //Rutas del Room
 Route::post("Room/makeRoom",[RoomController::class, 'makeRoom'])->name('Room.makeRoom');
 Route::put("Room/desactivateRoom",[RoomController::class, 'desactivateRoom'])->name('Room.desactivateRoom');
