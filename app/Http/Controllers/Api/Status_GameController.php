@@ -154,4 +154,45 @@ class Status_GameController extends Controller
                 'messagge' => "se actualiza el boton elegir color al presionar no me lo creo"
             ]);
     }
+
+    public function makeStatusSolo(Request $request)
+    {
+
+        $idUser = User::where('users.id', $request->idUsuarioTurno)->first();
+
+        if ($idUser->isAdmin == true) {
+            $newStatusAdmin = new Status_game;
+            $newStatusAdmin["idStatus"] = Uuid::uuid();
+            $newStatusAdmin["idSessionGame"] = $request->idSessionGame;
+            $newStatusAdmin["idUser"] = $request->idUsuarioTurno;
+            $newStatusAdmin["elegirColor"] = $request->elegirColor;
+            $newStatusAdmin["noMelacreo"] = $request->noMelacreo;
+            $newStatusAdmin["siMelacreo"] = $request->siMelacreo;
+            $newStatusAdmin["masoCartas"] = $request->masoCartas;
+            $newStatusAdmin["cartasMesa"] = $request->cartasMesa;
+            $newStatusAdmin["resetGame"] = $request->resetGame;
+            $newStatusAdmin->save();
+
+            return response()->json([
+                'messagge' => "se crearon los estados para un admin"
+            ]);
+        }
+        if ($idUser->isInvited == true) {
+            $newStatusInvited = new Status_game;
+            $newStatusInvited["idStatus"] = Uuid::uuid();
+            $newStatusInvited["idSessionGame"] = $request->idSessionGame;
+            $newStatusInvited["idUser"] = $request->idUser;
+            $newStatusInvited["elegirColor"] = $request->elegirColor;
+            $newStatusInvited["noMelacreo"] = $request->noMelacreo;
+            $newStatusInvited["siMelacreo"] = $request->siMelacreo;
+            $newStatusInvited["masoCartas"] = $request->masoCartas;
+            $newStatusInvited["cartasMesa"] = $request->cartasMesa;
+            $newStatusInvited["resetGame"] = $request->resetGame;
+            $newStatusInvited->save();
+
+            return response()->json([
+                'messagge' => "se crearon los estados para un invitado"
+            ]);
+        }
+    }
 }

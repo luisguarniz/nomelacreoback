@@ -117,7 +117,7 @@ class RoomController extends Controller
       $newRoom->save();
     }
     return response()->json([
-      'msg'=> "se crearon los room"
+      'roomID'=> $newRoom->roomID 
     ]);
   }
 }

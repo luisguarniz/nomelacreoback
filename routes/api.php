@@ -90,6 +90,9 @@ Route::put("Status_game/PressElegirColor",[Status_GameController::class, 'PressE
 Route::put("Status_game/nextTurn",[Status_GameController::class, 'nextTurn'])->name('Status_game.nextTurn');
 Route::put("Status_game/statusElegirColor",[Status_GameController::class, 'statusElegirColor'])->name('Status_game.statusElegirColor');
 
+Route::post("Status_game/makeStatusSolo",[Status_GameController::class, 'makeStatusSolo'])->name('Status_game.makeStatusSolo');
+
+
 //rutas de Score
 Route::post("Score/makeScore",[ScoreController::class, 'makeScore'])->name('Score.makeScore');
 Route::get("Score/getScore/{roomID}",[ScoreController::class, 'getScore'])->name('Score.getScore');
