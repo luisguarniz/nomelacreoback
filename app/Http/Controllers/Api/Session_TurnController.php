@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Session_turn;
+use App\Models\User;
 use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -77,8 +78,14 @@ class Session_TurnController extends Controller
       ->where('session_turns.orderTurn', 1)
       ->first();
       
+     $customName = DB::table('users')
+     ->select('users.customName')
+     ->where('users.id', $nextTurn->idUser)
+     ->first();
+
       return response()->json([
-        'nextTurn' => $nextTurn
+        'nextTurn' => $nextTurn,
+        'customName'=> $customName
       ]);
 
       }
@@ -97,9 +104,16 @@ class Session_TurnController extends Controller
       ->first();
       }
 
-      return response()->json([
-          'nextTurn' => $nextTurn
-        ]);
+      $customName = DB::table('users')
+      ->select('users.customName')
+      ->where('users.id', $nextTurn->idUser)
+      ->first();
+ 
+       return response()->json([
+         'nextTurn' => $nextTurn,
+         'customName'=> $customName
+       ]);
+ 
     }
 
     public function getTurn(Request $request){
@@ -110,6 +124,43 @@ class Session_TurnController extends Controller
        return response()->json([
         'turn' => $inTurn
       ]);
+    }
+
+
+    public function makeSessionTurnSolo(Request $request){
+         
+      //creamos y asignamos un numero de posicion para cada jugador
+      //no quiere decir que el jugador con posicion uno va ser el primero en 
+      //esto quiere decir que el admin tendra el numero menor siempre pero no sera el primero en jugar siempre
+        $alluser = array();
+        $tunrInicial = false;
+        $orderTurnInicial = 1;
+        $alluser = $request->idsParticipantes;
+        for ($i=0; $i < count($alluser); $i++) { 
+        $sessionTurn = new Session_turn;
+        $sessionTurn["idTurn"] = Uuid::uuid();
+        $sessionTurn["idUser"] = $alluser[$i];
+        $sessionTurn["idSessionGame"] = $request->idSessionGame;
+        $sessionTurn["turn"] = $tunrInicial;
+        $sessionTurn["orderTurn"] = $i + 1;
+        $sessionTurn->save();
+        }
+        
+        //elejimos un numero de los jugadores para que empiece a jugar
+        //luego seguira el numero siguiente en jugar
+        $idPrimerJugador = Session_turn::where('session_turns.idSessionGame', $request->idSessionGame)->get()->random();
+
+        //consultar con $idPrimerJugador->idUser el nombre del usuario para mostrar quien esta en turno 
+        $firsTurn = User::where('users.id', $idPrimerJugador->idUser)->first();
+
+        Session_turn::where('session_turns.idUser', $idPrimerJugador->idUser)
+        ->update([
+          'turn' => true,
+        ]);
+        return response()->json([
+            'firstid' => $firsTurn->id,
+            'customName' => $firsTurn->customName
+          ]);
     }
 
 

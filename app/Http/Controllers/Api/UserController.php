@@ -209,4 +209,20 @@ class UserController extends Controller
     ]);
 
   }
+
+  // crear metodo que traiga los usuarios que se crearon en el modo solo
+  //para eso se consultara la tabla rooms haciendo un where con codeBots como coincidencia
+
+  public function getUsersSolo(Request $request){
+
+    $customName = DB::table('rooms')
+    ->join('users', 'users.id', '=', 'rooms.idAdmin')
+    ->select('users.customName')
+    ->where('rooms.codeBots', $request->codeBots)
+    ->get();
+  //   return $query;
+  return response()->json([
+    'customName' => $customName
+  ]);
+  }
 }

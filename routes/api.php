@@ -42,6 +42,7 @@ Route::get("User/makeInvited",[UserController::class, 'makeInvited'])->name('Use
 
 //Rutas Modo Solo
 Route::get("User/makeUsers/{nroParticipantes}",[UserController::class, 'makeUsers'])->name('User.makeUsers');
+Route::get("User/getUsersSolo/{codeBots}",[UserController::class, 'getUsersSolo'])->name('User.getUsersSolo');
 
 //Rutas del Room
 Route::post("Room/makeRoom",[RoomController::class, 'makeRoom'])->name('Room.makeRoom');
@@ -79,6 +80,7 @@ Route::get("Session_game/updateStatusCardInicio/{idSessionGame}",[Session_GameCo
 Route::post("Session_turn/makeSessionTurn",[Session_TurnController::class, 'makeSessionTurn'])->name('Session_turn.makeSessionTurn');
 Route::put("Session_turn/changeTurn",[Session_TurnController::class, 'changeTurn'])->name('Session_turn.changeTurn');
 Route::get("Session_turn/getTurn/{idSessionGame}",[Session_TurnController::class, 'getTurn'])->name('Session_turn.getTurn');
+Route::post("Session_turn/makeSessionTurnSolo",[Session_TurnController::class, 'makeSessionTurnSolo'])->name('Session_turn.makeSessionTurnSolo');
 
 //Rutas de Status_game
 Route::post("Status_game/makeStatus",[Status_GameController::class, 'makeStatus'])->name('Status_game.makeStatus');

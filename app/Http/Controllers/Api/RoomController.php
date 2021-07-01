@@ -117,7 +117,8 @@ class RoomController extends Controller
       $newRoom->save();
     }
     return response()->json([
-      'roomID'=> $newRoom->roomID 
+      'roomID'=> $newRoom->roomID,
+      'codeBots' => $newRoom->codeBots
     ]);
   }
 }
