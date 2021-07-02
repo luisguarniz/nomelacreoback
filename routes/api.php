@@ -81,6 +81,7 @@ Route::post("Session_turn/makeSessionTurn",[Session_TurnController::class, 'make
 Route::put("Session_turn/changeTurn",[Session_TurnController::class, 'changeTurn'])->name('Session_turn.changeTurn');
 Route::get("Session_turn/getTurn/{idSessionGame}",[Session_TurnController::class, 'getTurn'])->name('Session_turn.getTurn');
 Route::post("Session_turn/makeSessionTurnSolo",[Session_TurnController::class, 'makeSessionTurnSolo'])->name('Session_turn.makeSessionTurnSolo');
+Route::get("Session_turn/getUserTurnNow/{idSessionGame}",[Session_TurnController::class, 'getUserTurnNow'])->name('Session_turn.getUserTurnNow');
 
 //Rutas de Status_game
 Route::post("Status_game/makeStatus",[Status_GameController::class, 'makeStatus'])->name('Status_game.makeStatus');
@@ -93,7 +94,8 @@ Route::put("Status_game/nextTurn",[Status_GameController::class, 'nextTurn'])->n
 Route::put("Status_game/statusElegirColor",[Status_GameController::class, 'statusElegirColor'])->name('Status_game.statusElegirColor');
 
 Route::post("Status_game/makeStatusSolo",[Status_GameController::class, 'makeStatusSolo'])->name('Status_game.makeStatusSolo');
-
+Route::put("Status_game/PressMasoCartasSolo",[Status_GameController::class, 'PressMasoCartasSolo'])->name('Status_game.PressMasoCartasSolo');
+Route::put("Status_game/PressElegirColorSolo",[Status_GameController::class, 'PressElegirColorSolo'])->name('Status_game.PressElegirColorSolo');
 
 //rutas de Score
 Route::post("Score/makeScore",[ScoreController::class, 'makeScore'])->name('Score.makeScore');

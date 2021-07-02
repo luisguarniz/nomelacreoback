@@ -163,5 +163,20 @@ class Session_TurnController extends Controller
           ]);
     }
 
+    public function getUserTurnNow(Request $request)
+    {
+      $customName = DB::table('session_turns')
+      ->join('users', 'users.id', '=', 'session_turns.idUser')
+      ->select('users.customName')
+      ->where('session_turns.idSessionGame', $request->idSessionGame)
+      ->where('session_turns.turn', 1)
+      ->first();
+
+      return response()->json([
+        'customName' => $customName
+      ]);
+
+    }
+
 
 }
