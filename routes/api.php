@@ -96,6 +96,9 @@ Route::put("Status_game/statusElegirColor",[Status_GameController::class, 'statu
 Route::post("Status_game/makeStatusSolo",[Status_GameController::class, 'makeStatusSolo'])->name('Status_game.makeStatusSolo');
 Route::put("Status_game/PressMasoCartasSolo",[Status_GameController::class, 'PressMasoCartasSolo'])->name('Status_game.PressMasoCartasSolo');
 Route::put("Status_game/PressElegirColorSolo",[Status_GameController::class, 'PressElegirColorSolo'])->name('Status_game.PressElegirColorSolo');
+Route::put("Status_game/PressSimelacreoSolo",[Status_GameController::class, 'PressSimelacreoSolo'])->name('Status_game.PressSimelacreoSolo');
+Route::put("Status_game/PressNomelacreoSolo",[Status_GameController::class, 'PressNomelacreoSolo'])->name('Status_game.PressNomelacreoSolo');
+
 
 //rutas de Score
 Route::post("Score/makeScore",[ScoreController::class, 'makeScore'])->name('Score.makeScore');

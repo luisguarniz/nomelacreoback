@@ -215,14 +215,14 @@ class UserController extends Controller
 
   public function getUsersSolo(Request $request){
 
-    $customName = DB::table('rooms')
+    $userList = DB::table('rooms')
     ->join('users', 'users.id', '=', 'rooms.idAdmin')
-    ->select('users.customName')
+    ->select('*')
     ->where('rooms.codeBots', $request->codeBots)
     ->get();
   //   return $query;
   return response()->json([
-    'customName' => $customName
+    'userList' => $userList
   ]);
   }
 }

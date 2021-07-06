@@ -239,4 +239,59 @@ class Status_GameController extends Controller
                 'messagge' => "se actualizaron los estados despues de presionar el maso de cartas"
             ]);
     }
+
+    public function PressSimelacreoSolo(Request $request)
+    {
+
+        $ids = array();
+        $ids = DB::table('rooms')
+        ->select('rooms.idAdmin')
+        ->where('rooms.codeBots', $request->codeBots)
+        ->get();
+
+
+        for ($i=0; $i < count($ids) ; $i++) { 
+        Status_game::where('status_games.idSessionGame', $request->idSessionGame)
+            ->where('status_games.idUser', $ids[$i]->idAdmin)
+            ->update([
+ 
+                'siMelacreo' => $request->siMelacreo,
+                'cartasMesa' => $request->cartasMesa,
+                'noMelacreo' => $request->noMelacreo,
+                'masoCartas' => $request->masoCartas
+            ]);
+        }
+
+            return response()->json([
+                'messagge' => "se actualizaron los estados despues de presionar SimelacreoSolo"
+            ]);
+        
+    }
+
+    public function PressNomelacreoSolo(Request $request)
+    {
+
+        $ids = array();
+        $ids = DB::table('rooms')
+        ->select('rooms.idAdmin')
+        ->where('rooms.codeBots', $request->codeBots)
+        ->get();
+
+
+        for ($i=0; $i < count($ids) ; $i++) { 
+        Status_game::where('status_games.idSessionGame', $request->idSessionGame)
+            ->where('status_games.idUser', $ids[$i]->idAdmin)
+            ->update([
+                'noMelacreo' => $request->noMelacreo,
+                'masoCartas' => $request->masoCartas,
+                'elegirColor' => $request->elegirColor
+            ]);
+        }
+
+            return response()->json([
+                'messagge' => "se actualizaron los estados despues de presionar NomelacreoSolo"
+            ]);
+
+        
+    }
 }
