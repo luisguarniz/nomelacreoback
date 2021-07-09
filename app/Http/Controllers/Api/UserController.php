@@ -163,8 +163,9 @@ class UserController extends Controller
     ]);
   }
 
-
-  public function makeUsers(Request $request)
+//creando bots
+/* 
+  public function makeBots(Request $request)
   {
     $nroParticipantes = intval($request->nroParticipantes);
     $nombres = array();
@@ -209,6 +210,50 @@ class UserController extends Controller
     ]);
 
   }
+*/
+public function makeUsers(Request $request)
+{
+
+  $nroParticipantes = count($request->Participantes);
+  $nombres = array();
+  $listParticipantes = array();
+
+  if ($nroParticipantes < 11) {
+
+    for ($i = 0; $i < $nroParticipantes; $i++) {
+      //Primero Creo un usuario
+      $permitted_chars1 = '0123456789abcdefghijklmnopqrstuvwxyz';
+      $nrorandom =  substr(str_shuffle($permitted_chars1), 0, 4); //guardamos los caracteres aleatorios
+
+      $nomCharacter = $request->Participantes[$i]["participante"];
+      $nombreUnico  = $nomCharacter . "-" . $nrorandom;
+
+      $this->newUser = new User();
+      $this->newUser->adminUserCode = Uuid::uuid();
+      $this->newUser->nameUsuario = $nombreUnico;
+      $this->newUser->customName = $nomCharacter;
+      $this->newUser->password = bcrypt('12345678');
+      $this->newUser->isAdmin = '1';
+      $this->newUser->save();
+      $nombres[$i] = $nombreUnico;
+    }
+  }else{
+    return response()->json([
+      'mensaje' => "Tiene que ser menor a 11 participantes"
+    ]);
+  }
+
+  for ($i=0; $i < $nroParticipantes ; $i++) { 
+    $listParticipantes[$i] = DB::table('users')
+    ->select('*')
+    ->where('nameUsuario', $nombres[$i])
+    ->first();
+  }
+  return response()->json([
+    'nroParticipantes' => $listParticipantes
+  ]);
+
+}
 
   // crear metodo que traiga los usuarios que se crearon en el modo solo
   //para eso se consultara la tabla rooms haciendo un where con codeBots como coincidencia

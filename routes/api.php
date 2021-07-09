@@ -41,7 +41,7 @@ Route::put("User/editNameUser",[UserController::class, 'editNameUser'])->name('u
 Route::get("User/makeInvited",[UserController::class, 'makeInvited'])->name('User.makeInvited');
 
 //Rutas Modo Solo
-Route::get("User/makeUsers/{nroParticipantes}",[UserController::class, 'makeUsers'])->name('User.makeUsers');
+Route::post("User/makeUsers",[UserController::class, 'makeUsers'])->name('User.makeUsers');
 Route::get("User/getUsersSolo/{codeBots}",[UserController::class, 'getUsersSolo'])->name('User.getUsersSolo');
 
 //Rutas del Room
