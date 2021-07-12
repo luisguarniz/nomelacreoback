@@ -214,9 +214,6 @@ class UserController extends Controller
 public function makeUsers(Request $request)
 {
 
-  return response()->json([
-    'nroParticipantes' => $request->Participantes
-  ]);
   $nroParticipantes = count($request->Participantes);
   $nombres = array();
   $listParticipantes = array();
