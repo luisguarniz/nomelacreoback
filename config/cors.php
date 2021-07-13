@@ -14,10 +14,11 @@ return [
     | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
     |
     */
-
+    //este es el original
    'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
-    //'paths' => ['api/*', 'sanctum/csrf-cookie','*'],
+   //este estoy probando para que supuestamente no tenga problemas cors en dreamhost
+   // 'paths' => ['api/*', 'sanctum/csrf-cookie','*'],
     'allowed_methods' => ['*'],
 
     'allowed_origins' => ['*'],
