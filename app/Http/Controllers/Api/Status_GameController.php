@@ -177,7 +177,7 @@ class Status_GameController extends Controller
             $newStatusAdmin["elegirColor"] = $request->elegirColor;
             $newStatusAdmin["noMelacreo"] = $request->noMelacreo;
             $newStatusAdmin["siMelacreo"] = $request->siMelacreo;
-            $newStatusAdmin["masoCartas"] = $request->masoCartas;
+            $newStatusAdmin["masoCartas"] = $request->masoCartas;//masoCartas recibe el valor de btnterminarTurno
             $newStatusAdmin["cartasMesa"] = $request->cartasMesa;
             $newStatusAdmin["resetGame"] = $request->resetGame;
             $newStatusAdmin->save();
