@@ -217,6 +217,13 @@ class CardController extends Controller
       ->where('scores.idUser', $idAnterior->idUser)
       ->first();
 
+
+      $customName = DB::table('users')
+      ->select('users.customName')
+      ->where('users.id', $idAnterior->idUser)
+      ->first();
+
+
       Score::where('scores.roomID', $request->roomID)
       ->where('scores.idUser', $idAnterior->idUser)
       ->update([
@@ -226,9 +233,10 @@ class CardController extends Controller
     }
 
     return response()->json([
-      'message'  => "el orden es correcto",
-      '$ordenNomelaCreo' => $ordenNomelaCreo,
-      'ordenNomelaCreoCorrecto' => $ordenNomelaCreoCorrecto
+   //   'message'  => "el orden es correcto",
+   //   '$ordenNomelaCreo' => $ordenNomelaCreo,
+   //   'ordenNomelaCreoCorrecto' => $ordenNomelaCreoCorrecto,
+      'customName' => $customName
     ]);
   }
     else {
@@ -251,11 +259,18 @@ class CardController extends Controller
         'score' => $scoredeusuario->score + 1
       ]);
 
+      
+      $customName = DB::table('users')
+      ->select('users.customName')
+      ->where('users.id', $request->idUser)
+      ->first();
+
       //devolvemos los dos arreglos comparados
       return response()->json([
-        'message'  => "el orden es incorrecto",
-        '$ordenNomelaCreo' => $ordenNomelaCreo,
-        'ordenNomelaCreoCorrecto' => $ordenNomelaCreoCorrecto
+     //   'message'  => "el orden es incorrecto",
+     //   '$ordenNomelaCreo' => $ordenNomelaCreo,
+     //   'ordenNomelaCreoCorrecto' => $ordenNomelaCreoCorrecto,
+        'customName' => $customName
       ]);
     }
   }
