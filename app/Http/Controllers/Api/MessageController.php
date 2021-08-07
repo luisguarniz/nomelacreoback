@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\changeName;
 use App\Events\GameEvent;
 use App\Events\messageChangeName;
 use App\Events\noMelacreo;

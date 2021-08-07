@@ -23,7 +23,7 @@ class messageChangeName implements ShouldBroadcast
     public function __construct($data)
     {
         $this->response = [
-            'msgNameEditado'   => $data['msgNameEditado'],
+            'msgNameEditado' => $data['msgNameEditado'],
            // 'codigoSesion' => $data['codigoSesion'],
             'to'           => $data['to'],
             'from'         => auth()->user(),

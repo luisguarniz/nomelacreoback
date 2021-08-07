@@ -24,6 +24,8 @@ class noMelacreo implements ShouldBroadcast
     {
     
         $this->response = [
+            'nameGanador' => $data['nameGanador'],
+            'colorRandom'=> $data['colorRandom'],
             'idSessionGame'=> $data['idSessionGame'],
             'idAdmin'   => $data['idAdmin'],
             'to'           => $data['to'],

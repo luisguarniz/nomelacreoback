@@ -233,7 +233,7 @@ class CardController extends Controller
     }
 
     return response()->json([
-   //   'message'  => "el orden es correcto",
+      'message'  => "el orden es correcto",
    //   '$ordenNomelaCreo' => $ordenNomelaCreo,
    //   'ordenNomelaCreoCorrecto' => $ordenNomelaCreoCorrecto,
       'customName' => $customName
@@ -267,7 +267,7 @@ class CardController extends Controller
 
       //devolvemos los dos arreglos comparados
       return response()->json([
-     //   'message'  => "el orden es incorrecto",
+       'message'  => "el orden es incorrecto",
      //   '$ordenNomelaCreo' => $ordenNomelaCreo,
      //   'ordenNomelaCreoCorrecto' => $ordenNomelaCreoCorrecto,
         'customName' => $customName

@@ -130,3 +130,7 @@ Route::post('Message/observador',[MessageController::class, 'observador'])
 Route::post('Message/resetGame',[MessageController::class, 'resetGame'])
 ->name('MessageController.resetGame')
 ->middleware('auth:api');
+
+Route::post('Message/changeName',[MessageController::class, 'changeName'])
+->name('MessageController.changeName')
+->middleware('auth:api');
