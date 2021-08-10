@@ -39,7 +39,8 @@ return [
                 'useTLS' => true,
                         'cluster' => env('PUSHER_APP_CLUSTER'),
                         'encrypted' => true,
-                        'host' => '127.0.0.1',
+                      //  'host' => '127.0.0.1', 
+                      'host' => 'api.agilefacilitationnetwork.com/nomelacreoback/public',
                         'port' => 6001,
                        // 'scheme' => 'http'
                        'scheme' => 'https'
