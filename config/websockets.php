@@ -118,7 +118,7 @@ return [
          */
        // 'local_cert' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_CERT', null), //de fabrica
        //'local_cert' => '/etc/apache2/ssl/nomelacreo.com/server.crt', //probando cert que me dio gustavo
-      'local_cert' => '/etc/letsencrypt/live/api.agilefacilitationnetwork.com/cert.pem',//certificado encontrado
+      'local_cert' => '/etc/letsencrypt/live/api.agilefacilitationnetwork.com/fullchain.pem',//certificado encontrado
         /*
          * Path to local private key file on filesystem in case of separate files for
          * certificate (local_cert) and private key.
