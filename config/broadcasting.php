@@ -43,7 +43,7 @@ return [
                       //  'host' => 'api.agilefacilitationnetwork.com/nomelacreoback',
                      // 'host' => 'api.agilefacilitationnetwork.com/nomelacreoback/public',
                      'host' => 'api.agilefacilitationnetwork.com', //asi funciono en planningpoker
-                        'port' => 6001,
+                        'port' => 443,
                         //'scheme' => 'http'
                         'scheme' => 'https',
                       'curl_options' => [
