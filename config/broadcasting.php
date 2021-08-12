@@ -36,18 +36,18 @@ return [
             'secret' => env('PUSHER_APP_SECRET'),
             'app_id' => env('PUSHER_APP_ID'),
             'options' => [
-                'useTLS' => true,
+               // 'useTLS' => true,
                         'cluster' => env('PUSHER_APP_CLUSTER'),
-                        'encrypted' => true,
+                //        'encrypted' => true,
                         'host' => '127.0.0.1',
                        //   'host' => 'www.monkeybootcamp.com', //asi funciono en planningpoker
-                        'port' => 6001,
-                        //'scheme' => 'http'
-                        'scheme' => 'https',
-                      'curl_options' => [
-                        CURLOPT_SSL_VERIFYHOST => 0,
-                        CURLOPT_SSL_VERIFYPEER => 0,
-                    ]
+                        'port' => 6002,
+                        'scheme' => 'http'
+                     //   'scheme' => 'https',
+                     // 'curl_options' => [
+                     //   CURLOPT_SSL_VERIFYHOST => 0,
+                     //   CURLOPT_SSL_VERIFYPEER => 0,
+                   // ]
                 ],
             ],
 
