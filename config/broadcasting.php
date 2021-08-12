@@ -41,7 +41,7 @@ return [
                 //        'encrypted' => true,
                         'host' => '127.0.0.1',
                        //   'host' => 'www.monkeybootcamp.com', //asi funciono en planningpoker
-                        'port' => 6002,
+                        'port' => 6008,
                         'scheme' => 'http'
                      //   'scheme' => 'https',
                      // 'curl_options' => [
