@@ -39,8 +39,8 @@ return [
                 'useTLS' => true,
                         'cluster' => env('PUSHER_APP_CLUSTER'),
                         'encrypted' => true,
-                        'host' => '127.0.0.1',
-                       //   'host' => 'www.monkeybootcamp.com',
+                       // 'host' => '127.0.0.1',
+                          'host' => 'www.monkeybootcamp.com',
                         'port' => 6002,
                      //   'scheme' => 'http'
                         'scheme' => 'https',
