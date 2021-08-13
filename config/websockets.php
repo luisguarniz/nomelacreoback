@@ -118,7 +118,7 @@ return [
          */
         'local_cert' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_CERT', null), //de fabrica
        //'local_cert' => '/etc/apache2/ssl/nomelacreo.com/server.crt', //probando cert que me dio gustavo
-      'local_cert' => '/etc/letsencrypt/live/monkeybootcamp.com/fullchain.pem',//certificado encontrado
+    //  'local_cert' => '/etc/letsencrypt/live/monkeybootcamp.com/fullchain.pem',//certificado encontrado
     //  'local_cert' => '/var/www/nomelacreoback/credenciales/server.crt',
         /*
          * Path to local private key file on filesystem in case of separate files for
@@ -126,7 +126,7 @@ return [
          */
       'local_pk' => env('LARAVEL_WEBSOCKETS_SSL_LOCAL_PK', null), //de fabrica
        //'local_pk' => '/etc/apache2/ssl/nomelacreo.com/server.key', //probando cert que me dio gustavo
-       'local_pk' => '/etc/letsencrypt/live/monkeybootcamp.com/privkey.pem',//certificado encontrado
+     //  'local_pk' => '/etc/letsencrypt/live/monkeybootcamp.com/privkey.pem',//certificado encontrado
      //  'local_pk' => '/var/www/nomelacreoback/credenciales/server.key',
 
         /*
