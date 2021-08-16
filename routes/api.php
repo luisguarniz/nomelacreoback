@@ -107,8 +107,6 @@ Route::get("Score/getIdUserScore/{roomID}",[ScoreController::class, 'getIdUserSc
 Route::get("Score/resetScore/{roomID}",[ScoreController::class, 'resetScore'])->name('Score.resetScore');
 
 //rutas para difundir mensajes en Web sockets
-
-/* 
 Route::post('Message/moveCard',[MessageController::class, 'moveCard'])
 ->name('MessageController.moveCard')
 ->middleware('auth:api');
@@ -132,7 +130,7 @@ Route::post('Message/observador',[MessageController::class, 'observador'])
 Route::post('Message/resetGame',[MessageController::class, 'resetGame'])
 ->name('MessageController.resetGame')
 ->middleware('auth:api');
-*/
+
 Route::post('Message/changeName',[MessageController::class, 'changeName'])
 ->name('MessageController.changeName')
 ->middleware('auth:api');
