@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Broadcast;
 |
 */
 
+/* 
+
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
@@ -41,10 +43,6 @@ Broadcast::channel('noMelacreo.{id}', function ($noMelacreo) {
     return $noMelacreo;
 });
 
-// ruta para cambiar nombre
-Broadcast::channel('changeName.{id}', function ($changeName) {
-    return $changeName;
-});
 
 
 Broadcast::channel('observador.{id}', function ($observador) {
@@ -55,4 +53,10 @@ Broadcast::channel('observador.{id}', function ($observador) {
 Broadcast::channel('votation.{id}', function ($user, $id) {
    return (int) $user->AdminUserCode === (int) $id;
        // return $user;
+});
+
+*/
+// ruta para cambiar nombre
+Broadcast::channel('changeName.{id}', function ($changeName) {
+    return $changeName;
 });
